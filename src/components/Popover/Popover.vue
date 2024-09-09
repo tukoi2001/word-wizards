@@ -1,0 +1,54 @@
+<script setup lang="ts">
+import { useAttrs, useSlots, inject } from 'vue';
+import { APP_PROVIDER } from 'config/constants';
+
+type Props = {
+  title?: string;
+  content?: string;
+  popperClass?: string;
+};
+
+withDefaults(defineProps<Props>(), {
+  title: '',
+  content: '',
+});
+
+const attrs = useAttrs();
+const slots = useSlots();
+
+const { isDarkMode } = inject(APP_PROVIDER.darkMode)!;
+</script>
+
+<template>
+  <el-popover
+    v-bind="attrs"
+    :content="content"
+    :title="title"
+    :effect="isDarkMode ? 'light' : 'dark'"
+    :popperClass="['popover-component', popperClass]"
+  >
+    <template v-if="!content && slots.default">
+      <slot></slot>
+    </template>
+    <template #reference v-if="!title && slots.reference">
+      <slot name="reference"></slot>
+    </template>
+  </el-popover>
+</template>
+
+<style lang="scss">
+.popover-component {
+  &.el-popover {
+    font-size: 12px;
+    color: var(--active-color);
+  }
+}
+
+.el-tooltip {
+  &__trigger {
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--text-primary-color);
+  }
+}
+</style>

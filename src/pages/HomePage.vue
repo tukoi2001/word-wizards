@@ -2,19 +2,6 @@
   <HomeContainer />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HomeContainer from 'containers/HomeContainer/HomeContainer.vue';
-
-export default defineComponent({
-  name: 'HomePage',
-  components: {
-    HomeContainer,
-  },
-  setup(_props) {
-    //
-  },
-});
+<script lang="ts" setup>
+import HomeContainer from 'containers/HomeContainer';
 </script>
-
-<style lang="scss" scoped></style>
