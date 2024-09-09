@@ -1,4 +1,4 @@
-name: build-and-test CI
+name: Build and Test CI
 
 on:
   push:
@@ -15,17 +15,19 @@ jobs:
         node-version: [20.12.0]
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-       
+          cache: 'pnpm'
+
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Install dependencies with pnpm
+      - name: Install dependencies
         run: pnpm install
 
       - name: Run linting
@@ -34,6 +36,5 @@ jobs:
       - name: Run tests
         run: pnpm run test
 
-       - name: Build the project
+      - name: Build the project
         run: pnpm run build --if-present
-      
