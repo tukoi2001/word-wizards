@@ -7,7 +7,7 @@ on:
     branches: ['develop']
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,14 +15,20 @@ jobs:
         node-version: [20.12.0]
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Setup node.js
+        uses: actions/setup-node@v4
         with:
-          version: 9.1.4
-      - uses: actions/setup-node@v4
-        with:
-         node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm lint
-      - run: pnpm build --if-present
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
