@@ -1,20 +1,18 @@
 @mixin style-text(
-  $font-family: "Outfit",
-  $font-style: normal,
+  $font-size: 16px,
   $font-weight: 400,
-  $font-size: 16,
-  $line-height: 24,
-  $letter-spacing: -2px
+  $line-height: 24px,
+  $letter-spacing: 1px,
+  $font-style: normal
 ) {
-  font-family: $font-family;
+  font-size: $font-size;
   font-style: $font-style;
   font-weight: $font-weight;
-  font-size: $font-size;
   line-height: $line-height;
   letter-spacing: $letter-spacing;
 }
 
-@mixin flexBox($justify-content: center, $align-items: center) {
+@mixin flex-box($justify-content: center, $align-items: center) {
   display: flex;
   justify-content: $justify-content;
   align-items: $align-items;
