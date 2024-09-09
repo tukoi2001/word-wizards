@@ -8,33 +8,35 @@ import {
 import { RootRouter } from 'enums/app';
 import HomePage from 'pages/HomePage.vue';
 
+const SignUpPage = () => import('pages/SignUpPage.vue');
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: RootRouter.ADS_MANAGER,
+    name: RootRouter.HOME_PAGE,
     component: HomePage,
     meta: {
-      title: RootRouter.ADS_MANAGER,
+      title: RootRouter.HOME_PAGE,
     },
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   component: () => import("../views/About"),
-  // },
+  {
+    path: '/sign-up',
+    name: RootRouter.SIGN_UP,
+    component: SignUpPage,
+    meta: {
+      title: RootRouter.SIGN_UP,
+    },
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(_to, _from, _savedPosition) {
-    return { left: 0, top: 0, behavior: 'smooth' };
-  },
 });
 
 router.beforeEach(
   (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    document.title = `ADS Report - ${to.meta.title}`;
+    document.title = `Word Wizards - ${to.meta.title}`;
     next();
   }
 );
