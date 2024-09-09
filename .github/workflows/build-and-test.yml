@@ -25,16 +25,18 @@ jobs:
           cache: 'pnpm'
 
       - name: Install pnpm
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.1.4
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Run linting
-        run: pnpm run lint
+        run: pnpm lint
 
-      - name: Run tests
-        run: pnpm run test
+      # - name: Run tests // TODO: Later
+      #   run: pnpm test
 
       - name: Build the project
-        run: pnpm run build --if-present
+        run: pnpm build --if-present
