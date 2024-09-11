@@ -8,4 +8,8 @@ declare namespace Auth {
     phoneNumber: string;
     address: string;
   };
+
+  type OTPForm = {
+    otp: string;
+  };
 }

@@ -48,6 +48,7 @@ defineProps<Props>();
 
   &__icon {
     @include flex-box;
+    flex-shrink: 0;
     position: relative;
     width: 48px;
     height: 48px;

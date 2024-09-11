@@ -32,5 +32,15 @@
   "are_you_sure_you_want_to_skip_filling_data": "Are you sure you want to skip filling in this information?",
   "skip_filling_data_description": "The following information is optional and can be skipped if not needed. Are you sure you want to proceed?",
   "login": "Log in",
-  "already_have_an_account": "Already have an account?"
+  "already_have_an_account": "Already have an account?",
+  "did_not_get_a_code": "Didn't get a code?",
+  "click_to_resend": "Click to resend",
+  "we_send_a_verify_code_to": "We send a verify code to:",
+  "verify_your_account": "Verify your account",
+  "verify_your_account_description": "The verification code sent to your email",
+  "welcome": "Welcome",
+  "your_account_has_been_activated": "Your account has been activated!",
+  "your_account_has_been_activated_description": "Your account is now active. Enjoy full access to all features!",
+  "welcome_to_word_wizards": "Welcome to word wizards!",
+  "welcome_to_word_wizards_description": "Join the fun with Word Wizards! Connect with others, challenge your vocabulary, and guess the words to win!"
 }

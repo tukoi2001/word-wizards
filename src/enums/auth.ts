@@ -4,3 +4,8 @@ export enum SignUpStep {
   PASSWORD,
   OTHER,
 }
+
+export enum VerifyOTPStep {
+  VERIFY,
+  DONE,
+}
