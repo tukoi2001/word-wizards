@@ -46,8 +46,8 @@ defineExpose({
 
 <style lang="scss">
 .otp-input {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   padding: 5px;
   margin: 0 10px;
   font-size: 20px;
@@ -71,6 +71,18 @@ defineExpose({
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+@media (max-width: 420px) {
+  .otp-input {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
   }
 }
 </style>

@@ -9,6 +9,7 @@ import { RootRouter } from 'enums/app';
 import HomePage from 'pages/HomePage.vue';
 
 const SignUpPage = () => import('pages/SignUpPage.vue');
+const VerifyOTPPage = () => import('pages/VerifyOTPPage.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +26,14 @@ const routes: Array<RouteRecordRaw> = [
     component: SignUpPage,
     meta: {
       title: RootRouter.SIGN_UP,
+    },
+  },
+  {
+    path: '/verify-otp',
+    name: RootRouter.VERIFY_OTP,
+    component: VerifyOTPPage,
+    meta: {
+      title: RootRouter.VERIFY_OTP,
     },
   },
   {

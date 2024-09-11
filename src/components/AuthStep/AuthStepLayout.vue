@@ -54,11 +54,13 @@ defineProps<Props>();
     @include style-text(25px, 600, 38px);
     margin-bottom: 12px;
     color: var(--text-primary-color);
+    text-align: center;
   }
 
   &__description {
     @include style-text(14px, 400, 21px);
     color: var(--text-tertiary-color);
+    text-align: center;
   }
 }
 
