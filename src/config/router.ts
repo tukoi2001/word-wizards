@@ -27,6 +27,14 @@ const routes: Array<RouteRecordRaw> = [
       title: RootRouter.SIGN_UP,
     },
   },
+  {
+    path: '/sign-in',
+    name: RootRouter.SIGN_IN,
+    component: SignUpPage, //TODO:
+    meta: {
+      title: RootRouter.SIGN_IN,
+    },
+  },
 ];
 
 const router = createRouter({

@@ -5,10 +5,7 @@ import { APP_PROVIDER } from 'config/constants';
 
 const { isDarkMode, toggleTheme } = useToggleTheme();
 
-provide(APP_PROVIDER.darkMode, {
-  isDarkMode,
-  toggleTheme,
-});
+provide(APP_PROVIDER.darkMode, { isDarkMode, toggleTheme });
 </script>
 
 <template>
