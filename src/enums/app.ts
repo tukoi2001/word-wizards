@@ -1,6 +1,7 @@
 export enum RootRouter {
   HOME_PAGE = 'Home Page',
   SIGN_UP = 'Sign Up',
+  SIGN_IN = 'Sign In',
 }
 
 export enum KeyCode {

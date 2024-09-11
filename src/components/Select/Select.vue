@@ -9,6 +9,7 @@ type Props = {
   name?: string;
   label?: string;
   inForm?: boolean;
+  isOptional: boolean;
   onChange?: (value: App.SelectOption['value'] | App.SelectOption['value'][]) => void;
 };
 
@@ -16,6 +17,7 @@ withDefaults(defineProps<Props>(), {
   name: 'select',
   label: '',
   inForm: false,
+  isOptional: false,
   onChange: noop,
 });
 const attrs = useAttrs();
@@ -43,7 +45,7 @@ const onBlur = (): void => {
 </script>
 
 <template>
-  <field-common :id="id" :inForm="inForm" :name="name" :label="label">
+  <field-common :id="id" :inForm="inForm" :name="name" :label="label" :is-optional="isOptional">
     <el-select
       v-bind="attrs"
       :class="[

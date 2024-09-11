@@ -40,7 +40,8 @@
       "utils/*": ["src/utils/*"],
       "enums/*": ["src/enums/*"],
       "hooks/*": ["src/hooks/*"],
-      "i18n/*": ["src/i18n/*"]
+      "i18n/*": ["src/i18n/*"],
+      "modals/*": ["src/modals/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],

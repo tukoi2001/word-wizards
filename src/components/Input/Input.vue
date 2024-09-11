@@ -9,7 +9,9 @@ type Props = {
   size?: 'large' | 'default' | 'small';
   name?: string;
   label?: string;
+  hint?: string;
   inForm?: boolean;
+  isOptional?: boolean;
   onChange?: (value: string) => void;
 };
 
@@ -19,6 +21,7 @@ withDefaults(defineProps<Props>(), {
   name: 'input',
   label: '',
   inForm: false,
+  isOptional: false,
   onChange: noop,
 });
 const attrs = useAttrs();
@@ -26,7 +29,7 @@ const id = useId();
 </script>
 
 <template>
-  <field-common :id="id" :inForm="inForm" :name="name" :label="label">
+  <field-common :id="id" :inForm="inForm" :name="name" :label="label" :isOptional="isOptional">
     <el-input
       v-bind="attrs"
       :type="type"
@@ -35,6 +38,7 @@ const id = useId();
       clearable
       @change="onChange"
     />
+    <div v-if="!!hint" class="input-component__hint">{{ hint }}</div>
   </field-common>
 </template>
 
@@ -49,11 +53,10 @@ const id = useId();
     --el-input-bg-color: var(--active-color);
     --el-input-placeholder-color: var(--text-tertiary-color);
   }
-}
 
-.el-input {
-  &__inner {
-    font-family: 'Noto Sans', sans-serif;
+  &__hint {
+    @include style-text(12px, 300, 18px);
+    color: var(--text-tertiary-color);
   }
 }
 </style>

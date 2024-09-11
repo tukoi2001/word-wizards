@@ -7,6 +7,7 @@ type Props = {
   type?: 'default' | 'primary' | 'danger';
   nativeType?: 'button' | 'submit' | 'reset';
   size?: 'large' | 'default' | 'small';
+  isFullWidth?: boolean;
   onClick?: () => void;
 };
 
@@ -14,6 +15,7 @@ withDefaults(defineProps<Props>(), {
   type: 'primary',
   nativeType: 'button',
   size: 'large',
+  isFullWidth: false,
   onClick: noop,
 });
 const attrs = useAttrs();
@@ -22,7 +24,7 @@ const attrs = useAttrs();
 <template>
   <el-button
     v-bind="attrs"
-    class="button-component"
+    :class="['button-component', { 'is-full-width': isFullWidth }]"
     :size="size"
     :type="type"
     :nativeType="nativeType"
@@ -34,6 +36,10 @@ const attrs = useAttrs();
 
 <style lang="scss">
 .button-component {
+  &.is-full-width {
+    width: 100%;
+  }
+
   &.el-button {
     --el-button-bg-color: var(--active-color);
     --el-button-border-color: var(--text-tertiary-color);
@@ -69,6 +75,12 @@ const attrs = useAttrs();
             background-color: var(--primary-color);
           }
         }
+      }
+
+      &.is-disabled {
+        --el-button-disabled-text-color: var(--active-color);
+        --el-button-disabled-bg-color: #{$primary-dark};
+        --el-button-disabled-border-color: #{$primary-dark};
       }
     }
 
