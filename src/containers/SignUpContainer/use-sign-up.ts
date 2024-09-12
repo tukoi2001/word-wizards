@@ -1,26 +1,15 @@
-import { computed, ref, reactive, Ref, Reactive, ComputedRef } from 'vue';
+import { computed, ref, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { SignUpStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
 import type { FormRules } from 'element-plus';
 
-type UseSignUpReturn = {
-  currentStep: Ref<SignUpStep>;
-  isLoading: Ref<boolean>;
-  formFields: Reactive<Auth.SignInForm>;
-  rules: ComputedRef<FormRules<Auth.SignInForm>>;
-  steps: ComputedRef<App.AuthStep[]>;
-  onChangeStep: () => void;
-  onBackStep: () => void;
-  onSignUp: () => Promise<void>;
-};
-
-export default function useSignUp(): UseSignUpReturn {
+export default function useSignUp() {
   const { t } = useI18n();
   const isLoading = ref<boolean>(false);
   const currentStep = ref<SignUpStep>(SignUpStep.EMAIL);
 
-  const formFields = reactive<Auth.SignInForm>({
+  const formFields = reactive<Auth.SignUpForm>({
     email: '',
     password: '',
     passwordConfirm: '',
@@ -30,7 +19,7 @@ export default function useSignUp(): UseSignUpReturn {
     address: '',
   });
 
-  const rules = computed<FormRules<Auth.SignInForm>>(() => ({
+  const rules = computed<FormRules<Auth.SignUpForm>>(() => ({
     email: [
       {
         required: true,

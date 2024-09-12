@@ -42,5 +42,11 @@
   "your_account_has_been_activated": "Your account has been activated!",
   "your_account_has_been_activated_description": "Your account is now active. Enjoy full access to all features!",
   "welcome_to_word_wizards": "Welcome to word wizards!",
-  "welcome_to_word_wizards_description": "Join the fun with Word Wizards! Connect with others, challenge your vocabulary, and guess the words to win!"
+  "welcome_to_word_wizards_description": "Join the fun with Word Wizards! Connect with others, challenge your vocabulary, and guess the words to win!",
+  "login_to_your_account": "Log in to your account",
+  "welcome_back_please_enter_your_details": "Welcome back! Please enter your details!",
+  "sign_up": "Sign up",
+  "sign_in": "Sign in",
+  "do_not_have_an_account": "Don't have an account?",
+  "forgot_password": "Forgot password"
 }

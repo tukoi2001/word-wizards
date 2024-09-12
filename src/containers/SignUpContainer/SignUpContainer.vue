@@ -110,7 +110,7 @@ const formRef = ref<FormInstance>();
 @media (min-width: 420px) {
   .sign-up-right {
     &__content {
-      max-width: 400px;
+      max-width: 360px;
     }
   }
 }
