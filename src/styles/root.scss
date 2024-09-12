@@ -2,6 +2,9 @@
 
 * {
   font-family: 'Inter', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0.5px;
 }
 
 .slide-fade-enter-active {
