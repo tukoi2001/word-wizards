@@ -2,7 +2,7 @@
 type Props = {
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
 };
 
 defineProps<Props>();
@@ -11,7 +11,7 @@ defineProps<Props>();
 <template>
   <div class="auth-step-layout">
     <div class="auth-step-layout-header">
-      <div class="auth-step-layout-header__icon">
+      <div v-if="!!icon" class="auth-step-layout-header__icon">
         <font-icon :name="icon" color="var(--text-secondary-color)" :size="32" />
       </div>
       <div class="auth-step-layout-header__title">

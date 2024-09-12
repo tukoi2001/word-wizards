@@ -68,7 +68,7 @@ const onVerifySuccess = (): void => {
 @media (min-width: 420px) {
   .verify-otp-container {
     &__content {
-      max-width: 400px;
+      max-width: 360px;
     }
   }
 }

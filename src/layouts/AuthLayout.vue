@@ -1,14 +1,17 @@
 <script lang="ts" setup>
+import { useSlots } from 'vue';
 import { ElScrollbar } from 'element-plus';
 import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
 import DarkModeToggle from 'components/DarkModeToggle';
 import SelectLanguage from 'components/SelectLanguage';
+
+const slots = useSlots();
 </script>
 
 <template>
   <div class="auth-layout">
-    <aside class="auth-layout-sidebar">
+    <aside v-if="slots.sidebar" class="auth-layout-sidebar">
       <router-link class="auth-layout-sidebar__header" :to="{ name: RootRouter.HOME_PAGE }">
         <img :src="resources.APP_LOGO" alt="app-logo" />
         <div class="auth-layout-sidebar__title">Word Wizards</div>

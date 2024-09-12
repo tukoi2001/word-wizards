@@ -1,5 +1,5 @@
 declare namespace Auth {
-  type SignInForm = {
+  type SignUpForm = {
     email: string;
     password: string;
     passwordConfirm: string;
@@ -7,6 +7,11 @@ declare namespace Auth {
     lastName: string;
     phoneNumber: string;
     address: string;
+  };
+
+  type SignInForm = {
+    email: string;
+    password: string;
   };
 
   type OTPForm = {
