@@ -90,6 +90,7 @@ const slots = useSlots();
 
   &__main {
     flex: 1 0 auto;
+    position: relative;
   }
 }
 

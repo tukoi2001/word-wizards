@@ -61,16 +61,14 @@ const formRef = ref<FormInstance>();
           />
         </transition>
         <div class="sign-up-right-footer">
-          <div class="sign-up-right-footer__navigate">
-            <span class="sign-up-right-footer__title">{{ t('already_have_an_account') }}</span>
-            <router-link class="sign-up-right-footer__link" :to="{ name: RootRouter.SIGN_IN }">
-              {{ t('login') }}
-            </router-link>
-          </div>
-          <auth-dot-step :currentStep="currentStep" :steps="steps" />
+          <span class="sign-up-right-footer__title">{{ t('already_have_an_account') }}</span>
+          <router-link class="sign-up-right-footer__link" :to="{ name: RootRouter.SIGN_IN }">
+            {{ t('login') }}
+          </router-link>
         </div>
       </div>
     </el-form>
+    <auth-dot-step :currentStep="currentStep" :steps="steps" />
   </auth-layout>
 </template>
 
@@ -90,10 +88,6 @@ const formRef = ref<FormInstance>();
 }
 
 .sign-up-right-footer {
-  &__navigate {
-    padding-bottom: 40px;
-  }
-
   &__title {
     @include style-text(13px, 400, 20px);
     color: var(--text-primary-color);

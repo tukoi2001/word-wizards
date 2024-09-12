@@ -52,7 +52,7 @@ const onValidatePassword = (): void => {
               name="email"
               :label="t('email_address')"
               :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
-              inForm
+              in-form
               @input="onValidateEmail"
             />
             <input-component
@@ -61,8 +61,8 @@ const onValidatePassword = (): void => {
               type="password"
               :label="t('password')"
               :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
-              showPassword
-              inForm
+              show-password
+              in-form
               @input="onValidatePassword"
             />
             <router-link class="sign-in-container__action" :to="{ name: RootRouter.SIGN_IN }">

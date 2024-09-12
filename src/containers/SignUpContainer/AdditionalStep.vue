@@ -63,49 +63,51 @@ const onContinue = (): void => {
 </script>
 
 <template>
-  <auth-step-layout
-    :title="t('enter_your_additional_information')"
-    :description="t('enter_your_additional_information_description')"
-    icon="settings"
-  >
-    <template #content>
-      <input-component
-        v-model="phoneNumber"
-        name="phoneNumber"
-        :label="t('phone_number')"
-        :placeholder="t('enter_your_field', { field: t('phone_number').toLowerCase() })"
-        isOptional
-        inForm
-        @input="onValidatePhoneNumber"
-      />
-      <input-component
-        v-model="address"
-        name="address"
-        :label="t('address')"
-        :placeholder="t('enter_your_field', { field: t('address').toLowerCase() })"
-        isOptional
-        inForm
-        @input="onValidateAddress"
-      />
-    </template>
-    <template #action>
-      <button-component type="default" size="default" isFullWidth :onClick="onBackStep">
-        {{ t('back') }}
-      </button-component>
-      <button-component
-        size="default"
-        :disabled="!isValidPhoneNumber || !isValidAddress"
-        isFullWidth
-        :onClick="onContinue"
-      >
-        {{ buttonLabel }}
-      </button-component>
-    </template>
-  </auth-step-layout>
-  <skip-additional-modal
-    v-if="isShowSkipAdditionalModal"
-    v-model="isShowSkipAdditionalModal"
-    :is-loading="isLoading"
-    :on-sign-up="onSignUp"
-  />
+  <div class="additional-step">
+    <auth-step-layout
+      :title="t('enter_your_additional_information')"
+      :description="t('enter_your_additional_information_description')"
+      icon="settings"
+    >
+      <template #content>
+        <input-component
+          v-model="phoneNumber"
+          name="phoneNumber"
+          :label="t('phone_number')"
+          :placeholder="t('enter_your_field', { field: t('phone_number').toLowerCase() })"
+          isOptional
+          in-form
+          @input="onValidatePhoneNumber"
+        />
+        <input-component
+          v-model="address"
+          name="address"
+          :label="t('address')"
+          :placeholder="t('enter_your_field', { field: t('address').toLowerCase() })"
+          is-optional
+          in-form
+          @input="onValidateAddress"
+        />
+      </template>
+      <template #action>
+        <button-component type="default" size="default" isFullWidth :onClick="onBackStep">
+          {{ t('back') }}
+        </button-component>
+        <button-component
+          size="default"
+          :disabled="!isValidPhoneNumber || !isValidAddress"
+          is-full-width
+          :onClick="onContinue"
+        >
+          {{ buttonLabel }}
+        </button-component>
+      </template>
+    </auth-step-layout>
+    <skip-additional-modal
+      v-if="isShowSkipAdditionalModal"
+      v-model="isShowSkipAdditionalModal"
+      :is-loading="isLoading"
+      :on-sign-up="onSignUp"
+    />
+  </div>
 </template>

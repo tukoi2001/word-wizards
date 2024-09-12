@@ -17,4 +17,14 @@ declare namespace Auth {
   type OTPForm = {
     otp: string;
   };
+
+  type ForgotPasswordForm = {
+    email: string;
+  };
+
+  type ResetPassword = {
+    newPassword: string;
+    token?: string;
+    confirmNewPassword?: string;
+  };
 }
