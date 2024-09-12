@@ -9,6 +9,8 @@ import { RootRouter } from 'enums/app';
 import authRoutes from 'routers/auth';
 import HomePage from 'pages/HomePage.vue';
 
+const NotFoundPage = () => import('pages/NotFoundPage.vue');
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -16,6 +18,14 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage,
     meta: {
       title: RootRouter.HOME_PAGE,
+    },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: RootRouter.NOT_FOUND,
+    component: NotFoundPage,
+    meta: {
+      title: RootRouter.NOT_FOUND,
     },
   },
   ...authRoutes,

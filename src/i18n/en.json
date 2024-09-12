@@ -48,5 +48,10 @@
   "sign_up": "Sign up",
   "sign_in": "Sign in",
   "do_not_have_an_account": "Don't have an account?",
-  "forgot_password": "Forgot password"
+  "forgot_password": "Forgot password",
+  "not_found": "404 Error",
+  "page_not_found": "Page not found",
+  "page_not_found_description": "Sorry, the page you are looking for doesn't exits or has been removed. Here are some helpful links:",
+  "go_back": "Go back",
+  "take_me_home": "Take me home"
 }
