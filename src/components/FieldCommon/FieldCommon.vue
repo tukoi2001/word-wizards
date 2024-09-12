@@ -6,6 +6,7 @@ type Props = {
   id: string;
   name: string;
   inForm: boolean;
+  isOptional: boolean;
   label?: string;
 };
 
@@ -15,19 +16,31 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <el-form-item v-if="inForm" :props="name">
-    <field-common-label :id="id" :label="label">
+  <el-form-item v-if="inForm" :prop="name">
+    <field-common-label :id="id" :label="label" :is-optional="isOptional">
       <slot></slot>
     </field-common-label>
   </el-form-item>
-  <field-common-label v-else :id="id" :label="label">
+  <field-common-label v-else :id="id" :label="label" :is-optional="isOptional">
     <slot></slot>
   </field-common-label>
 </template>
 
-<style lang="scss" scoped>
-.el-form-item {
-  width: 100%;
-  margin-bottom: 24px;
+<style lang="scss">
+.el-form {
+  .el-form-item {
+    width: 100%;
+    margin-bottom: 24px;
+
+    &__error {
+      top: auto;
+      bottom: -18px;
+      font-size: 12px;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
 }
 </style>

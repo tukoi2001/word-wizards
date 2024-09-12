@@ -1,5 +1,5 @@
 <template>
-  <HomeContainer />
+  <home-container />
 </template>
 
 <script lang="ts" setup>

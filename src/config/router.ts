@@ -6,9 +6,10 @@ import {
   RouteRecordRaw,
 } from 'vue-router';
 import { RootRouter } from 'enums/app';
+import authRoutes from 'routers/auth';
 import HomePage from 'pages/HomePage.vue';
 
-const SignUpPage = () => import('pages/SignUpPage.vue');
+const NotFoundPage = () => import('pages/NotFoundPage.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,13 +21,14 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/sign-up',
-    name: RootRouter.SIGN_UP,
-    component: SignUpPage,
+    path: '/:pathMatch(.*)*',
+    name: RootRouter.NOT_FOUND,
+    component: NotFoundPage,
     meta: {
-      title: RootRouter.SIGN_UP,
+      title: RootRouter.NOT_FOUND,
     },
   },
+  ...authRoutes,
 ];
 
 const router = createRouter({

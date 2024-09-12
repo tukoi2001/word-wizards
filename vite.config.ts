@@ -20,6 +20,8 @@ export default defineConfig({
       enums: path.resolve(__dirname, 'src/enums'),
       hooks: path.resolve(__dirname, 'src/hooks'),
       i18n: path.resolve(__dirname, 'src/i18n'),
+      modals: path.resolve(__dirname, 'src/modals'),
+      routers: path.resolve(__dirname, 'src/routers'),
     },
   },
   css: {

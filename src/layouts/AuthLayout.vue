@@ -1,20 +1,26 @@
 <script lang="ts" setup>
+import { useSlots } from 'vue';
+import { ElScrollbar } from 'element-plus';
 import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
 import DarkModeToggle from 'components/DarkModeToggle';
 import SelectLanguage from 'components/SelectLanguage';
+
+const slots = useSlots();
 </script>
 
 <template>
   <div class="auth-layout">
-    <aside class="auth-layout-sidebar">
+    <aside v-if="slots.sidebar" class="auth-layout-sidebar">
       <router-link class="auth-layout-sidebar__header" :to="{ name: RootRouter.HOME_PAGE }">
         <img :src="resources.APP_LOGO" alt="app-logo" />
         <div class="auth-layout-sidebar__title">Word Wizards</div>
       </router-link>
-      <div class="auth-layout-sidebar__main">
-        <slot name="sidebar"></slot>
-      </div>
+      <el-scrollbar height="calc(100vh - 132px)">
+        <div class="auth-layout-sidebar__main">
+          <slot name="sidebar"></slot>
+        </div>
+      </el-scrollbar>
       <div class="auth-layout-sidebar__footer">
         <div class="auth-layout-sidebar__copy-right">&copy; Tu Xuan Front End Dev 2024</div>
         <a class="auth-layout-sidebar__contact" href="mailto:tutx.it610@gmail.com">
@@ -36,7 +42,9 @@ import SelectLanguage from 'components/SelectLanguage';
         </div>
       </div>
       <div class="auth-layout-content__main">
-        <slot name="default"></slot>
+        <el-scrollbar height="calc(100vh - 88px)">
+          <slot name="default"></slot>
+        </el-scrollbar>
       </div>
     </main>
   </div>
@@ -52,52 +60,7 @@ import SelectLanguage from 'components/SelectLanguage';
 }
 
 .auth-layout-sidebar {
-  display: flex;
-  flex: 0 0 440px;
-  flex-direction: column;
-  padding: 32px;
-  background: var(--secondary-color);
-
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-
-  &__title {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 32px;
-    letter-spacing: 1px;
-    color: var(--text-primary-color);
-  }
-
-  &__main {
-    flex-grow: 1;
-    padding-top: 80px;
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__copy-right,
-  &__contact {
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 20px;
-    color: var(--text-tertiary-color);
-  }
-
-  &__contact {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-  }
+  display: none;
 }
 
 .auth-layout-content {
@@ -114,6 +77,7 @@ import SelectLanguage from 'components/SelectLanguage';
   }
 
   &__logo {
+    display: block;
     width: 32px;
     height: 32px;
     object-fit: cover;
@@ -126,6 +90,69 @@ import SelectLanguage from 'components/SelectLanguage';
 
   &__main {
     flex: 1 0 auto;
+    position: relative;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-layout-sidebar {
+    display: flex;
+    flex: 0 0 440px;
+    flex-direction: column;
+    padding: 32px;
+    background: var(--secondary-color);
+
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      padding-bottom: 20px;
+    }
+
+    &__title {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 32px;
+      letter-spacing: 1px;
+      color: var(--text-primary-color);
+    }
+
+    &__main {
+      padding: 40px 1px;
+    }
+
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+    }
+
+    &__copy-right,
+    &__contact {
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 20px;
+      color: var(--text-tertiary-color);
+    }
+
+    &__contact {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+  }
+
+  .auth-layout-content {
+    &__header {
+      justify-content: flex-end;
+    }
+
+    &__logo {
+      display: none;
+    }
   }
 }
 </style>
