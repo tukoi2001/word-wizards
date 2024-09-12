@@ -3,6 +3,7 @@ import { reactive, ref, computed } from 'vue';
 import { ElForm } from 'element-plus';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
+import { noop } from 'lodash-es';
 
 import { RootRouter } from 'enums/app';
 import { ForgotPasswordStep } from 'enums/auth';
@@ -44,13 +45,13 @@ const steps = computed<App.AuthStep[]>(() => [
     title: t('forgot_password'),
     description: t('forgot_password_description'),
     icon: 'email',
-    action: () => onSwitchStep(ForgotPasswordStep.RESET),
+    action: noop,
   },
   {
     title: t('check_your_instructions'),
     description: t('check_your_instructions_description'),
     icon: 'check-circle',
-    action: () => onSwitchStep(ForgotPasswordStep.DONE),
+    action: noop,
   },
 ]);
 
