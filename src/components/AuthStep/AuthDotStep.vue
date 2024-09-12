@@ -24,7 +24,11 @@ defineProps<Props>();
 <style scoped lang="scss">
 .auth-step-dot {
   @include flex-box(center, flex-start);
-  gap: 20px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px;
 }
 
 .auth-step-dot-item {
@@ -33,12 +37,15 @@ defineProps<Props>();
   border-radius: 50%;
   background-color: var(--secondary-color);
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   &.is-disabled {
     pointer-events: none;
   }
 
   &.is-active {
+    width: 30px;
+    border-radius: 100px;
     background-color: var(--primary-color);
   }
 }

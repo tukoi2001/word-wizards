@@ -44,14 +44,14 @@ const onValidateEmail = (): void => {
         name="email"
         :label="t('email_address')"
         :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
-        inForm
+        in-form
         @input="onValidateEmail"
       />
     </template>
     <template #action>
       <button-component
         size="default"
-        isFullWidth
+        is-full-width
         :disabled="!isValidEmail"
         :onClick="onChangeStep"
       >

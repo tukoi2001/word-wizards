@@ -48,10 +48,19 @@
   "sign_up": "Sign up",
   "sign_in": "Sign in",
   "do_not_have_an_account": "Don't have an account?",
-  "forgot_password": "Forgot password",
+  "forgot_password": "Forgot password?",
   "not_found": "404 Error",
   "page_not_found": "Page not found",
   "page_not_found_description": "Sorry, the page you are looking for doesn't exits or has been removed. Here are some helpful links:",
   "go_back": "Go back",
-  "take_me_home": "Take me home"
+  "take_me_home": "Take me home",
+  "reset_password": "Reset password",
+  "forgot_password_description": "No worries, we'll send you reset instructions?",
+  "check_your_instructions_description": "We have sent you reset instructions to your email.",
+  "check_your_instructions": "Check your instructions",
+  "password_reset_successfully": "Password reset successfully!",
+  "password_reset_successfully_description": "Your password has been reset successfully! Click below to log in magically.",
+  "create_a_new_password": "Create a new password",
+  "create_a_new_password_description": "Enter a password that hasn't been used before.",
+  "apply_your_changes": "Apply your changes"
 }

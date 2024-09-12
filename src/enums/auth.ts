@@ -9,3 +9,8 @@ export enum VerifyOTPStep {
   VERIFY,
   DONE,
 }
+
+export enum ForgotPasswordStep {
+  RESET,
+  DONE,
+}

@@ -61,8 +61,8 @@ const onValidatePasswordConfirm = (): void => {
         :label="t('password')"
         :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
         :hint="t('password_hint')"
-        showPassword
-        inForm
+        show-password
+        in-form
         @input="onValidatePassword"
       />
       <input-component
@@ -71,8 +71,8 @@ const onValidatePasswordConfirm = (): void => {
         type="password"
         :label="t('password_confirm')"
         :placeholder="t('enter_your_field', { field: t('password_confirm').toLowerCase() })"
-        showPassword
-        inForm
+        show-password
+        in-form
         @input="onValidatePasswordConfirm"
       />
     </template>
@@ -82,7 +82,7 @@ const onValidatePasswordConfirm = (): void => {
       </button-component>
       <button-component
         size="default"
-        isFullWidth
+        is-full-width
         :disabled="!isValidPassword || !isValidPasswordConfirm"
         :onClick="onChangeStep"
       >

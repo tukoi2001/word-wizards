@@ -44,8 +44,8 @@ const onVerifySuccess = (): void => {
         />
         <verified-success v-else />
       </transition>
-      <auth-dot-step :currentStep="currentStep" :steps="steps" />
     </div>
+    <auth-dot-step :currentStep="currentStep" :steps="steps" />
   </auth-layout>
 </template>
 

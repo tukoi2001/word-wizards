@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAttrs, ref, computed } from 'vue';
+import { useAttrs } from 'vue';
 import { ElSelect, ElOption, useId } from 'element-plus';
 import { noop } from 'lodash-es';
 import FieldCommon from 'components/FieldCommon';
@@ -22,42 +22,11 @@ withDefaults(defineProps<Props>(), {
 });
 const attrs = useAttrs();
 const id = useId();
-
-const isTouched = ref<boolean>(false);
-const isFilling = ref<boolean>(false);
-
-const modelValue = computed(() => attrs['modelValue'] as string);
-
-const hasValue = computed<boolean>(() => modelValue.value?.length > 0 || !!modelValue.value);
-
-const onFocus = (): void => {
-  isTouched.value = true;
-  isFilling.value = false;
-};
-
-const onClear = (): void => {
-  isTouched.value = false;
-};
-
-const onBlur = (): void => {
-  isTouched.value = false;
-};
 </script>
 
 <template>
-  <field-common :id="id" :inForm="inForm" :name="name" :label="label" :is-optional="isOptional">
-    <el-select
-      v-bind="attrs"
-      :class="[
-        'select-component',
-        { 'is-focused': isTouched, 'is-filling': isFilling || !!hasValue },
-      ]"
-      fitInputWidth
-      @change="onChange"
-      @focus="onFocus"
-      @clear="onClear"
-      @blur="onBlur"
-    >
+  <field-common :id="id" :in-form="inForm" :name="name" :label="label" :is-optional="isOptional">
+    <el-select v-bind="attrs" :class="['select-component']" fit-input-width @change="onChange">
       <el-option
         v-for="option in options"
         :key="String(option.value)"

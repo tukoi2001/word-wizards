@@ -32,7 +32,7 @@ const onDone = (): void => {
 
 <style scoped lang="scss">
 .verify-success-content {
-  @include style-text(16px, 500, 24px);
+  @include style-text(18px, 400, 27px);
   text-align: center;
   color: var(--primary-color);
 }

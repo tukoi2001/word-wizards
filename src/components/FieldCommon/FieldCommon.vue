@@ -17,11 +17,11 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <el-form-item v-if="inForm" :prop="name">
-    <field-common-label :id="id" :label="label" :isOptional="isOptional">
+    <field-common-label :id="id" :label="label" :is-optional="isOptional">
       <slot></slot>
     </field-common-label>
   </el-form-item>
-  <field-common-label v-else :id="id" :label="label" :isOptional="isOptional">
+  <field-common-label v-else :id="id" :label="label" :is-optional="isOptional">
     <slot></slot>
   </field-common-label>
 </template>

@@ -58,7 +58,7 @@ const onValidateLastName = (): void => {
         name="firstName"
         :label="t('first_name')"
         :placeholder="t('enter_your_field', { field: t('first_name').toLowerCase() })"
-        inForm
+        in-form
         @input="onValidateFirstName"
       />
       <input-component
@@ -66,7 +66,7 @@ const onValidateLastName = (): void => {
         name="lastName"
         :label="t('last_name')"
         :placeholder="t('enter_your_field', { field: t('last_name').toLowerCase() })"
-        inForm
+        in-form
         @input="onValidateLastName"
       />
     </template>
@@ -76,7 +76,7 @@ const onValidateLastName = (): void => {
       </button-component>
       <button-component
         size="default"
-        isFullWidth
+        is-full-width
         :disabled="!isValidFirstName || !isValidLastName"
         :onClick="onChangeStep"
       >
