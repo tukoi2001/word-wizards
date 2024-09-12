@@ -3,6 +3,7 @@ export enum RootRouter {
   SIGN_UP = 'Sign Up',
   VERIFY_OTP = 'Verify OTP',
   SIGN_IN = 'Sign In',
+  NOT_FOUND = 'Not Found',
 }
 
 export enum KeyCode {
