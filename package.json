@@ -14,6 +14,7 @@
   "dependencies": {
     "@tanstack/vue-query": "5.56.1",
     "@types/js-cookie": "3.0.6",
+    "@types/uuid": "10.0.0",
     "axios": "1.7.7",
     "crypto-js": "4.2.0",
     "element-plus": "2.7.8",
@@ -22,7 +23,7 @@
     "lodash-es": "4.17.21",
     "pinia": "2.2.2",
     "sass": "1.77.8",
-    "uuidv4": "6.2.13",
+    "uuid": "10.0.0",
     "vue": "3.4.34",
     "vue-i18n": "9",
     "vue-router": "4.4.0",

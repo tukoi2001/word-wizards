@@ -42,7 +42,8 @@
       "hooks/*": ["src/hooks/*"],
       "i18n/*": ["src/i18n/*"],
       "modals/*": ["src/modals/*"],
-      "routers/*": ["src/routers/*"]
+      "routers/*": ["src/routers/*"],
+      "stores/*": ["src/stores/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],

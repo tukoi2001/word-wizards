@@ -40,6 +40,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 const handleRefreshToken = async (): Promise<Request.TokenResponse['accessToken']> => {
   try {
+    isRefreshing = true;
     const refreshToken = getRefreshToken();
     const response = await axiosInstance.post<Request.TokenResponse>('/auth/refresh-token', {
       refreshToken,
@@ -49,6 +50,8 @@ const handleRefreshToken = async (): Promise<Request.TokenResponse['accessToken'
     return response.data.accessToken;
   } catch {
     throw new Error('Refresh token invalid!');
+  } finally {
+    isRefreshing = false;
   }
 };
 
@@ -58,10 +61,10 @@ const handleUnauthorized = (): void => {
 };
 
 const shouldRefreshToken = (token: string): boolean => {
-  const { exp } = jwtDecode<Request.DecodedToken>(token);
+  const decode = jwtDecode<Request.DecodedToken>(token);
   const currentTime = Date.now() / 1000;
-  const ttl = exp - currentTime;
-  return ttl < (exp - currentTime) / 3;
+  const ttl = decode.exp - currentTime;
+  return ttl < (decode.exp - currentTime) / 3;
 };
 
 const handleAccessTokenExpired = async (
@@ -78,12 +81,13 @@ const handleAccessTokenExpired = async (
       return Promise.reject(error);
     }
   }
-  isRefreshing = true;
   try {
-    const accessToken = await handleRefreshToken();
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    originalRequest.headers!['Authorization'] = `Bearer ${accessToken}`;
-    processQueueRequest(null, accessToken);
+    if (!isRefreshing) {
+      const accessToken = await handleRefreshToken();
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      originalRequest.headers!['Authorization'] = `Bearer ${accessToken}`;
+      processQueueRequest(null, accessToken);
+    }
     return axiosInstance(originalRequest);
   } catch (error) {
     processQueueRequest(error as Error, null);
@@ -96,8 +100,8 @@ const handleAccessTokenExpired = async (
 
 const handleResponseError = (error: AxiosError): Promise<AxiosResponse> => {
   const status = error.response!.status;
-  const errorData = error.response!.data!;
   const originalRequest = error.config;
+  const errorData = get(error, 'response.data.message');
   switch (status) {
     case StatusCode.UNAUTHORIZED:
       handleUnauthorized();
@@ -108,7 +112,7 @@ const handleResponseError = (error: AxiosError): Promise<AxiosResponse> => {
     default:
       break;
   }
-  return Promise.reject({ ...error, ...errorData });
+  return Promise.reject(errorData);
 };
 
 axiosInstance.interceptors.request.use(

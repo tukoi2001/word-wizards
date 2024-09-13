@@ -21,3 +21,10 @@ export enum StatusCode {
   UNAUTHORIZED = 401,
   ACCESS_TOKEN_EXPIRED = 440,
 }
+
+export enum NotificationType {
+  SUCCESS = 'success',
+  ERROR = 'error',
+  WARNING = 'warning',
+  INFO = 'info',
+}

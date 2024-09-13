@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { v4 as uuidv4 } from 'uuid';
+
 import FieldCommon from 'components/FieldCommon';
 
 type Props = {
@@ -18,7 +20,7 @@ withDefaults(defineProps<Props>(), {
   onChange: noop,
 });
 const attrs = useAttrs();
-const id = uuid();
+const id = uuidv4();
 </script>
 
 <template>
