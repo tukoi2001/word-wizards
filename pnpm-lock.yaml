@@ -88,7 +88,7 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
       unplugin-auto-import:
-        specifier: ^0.18.3
+        specifier: 0.18.3
         version: 0.18.3(@vueuse/core@9.13.0(vue@3.4.34(typescript@5.5.4)))(rollup@4.21.1)
       vite:
         specifier: 5.3.4
