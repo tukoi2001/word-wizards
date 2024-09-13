@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
+import viteCompression from 'vite-plugin-compression';
 import path from 'path';
 
 export default defineConfig(({ mode }) => {
@@ -11,8 +12,29 @@ export default defineConfig(({ mode }) => {
       NODE_ENV: JSON.stringify(env.NODE_ENV),
       VUE_APP_API_URL: JSON.stringify(env.VUE_APP_API_URL),
     },
+    build: {
+      target: 'esnext',
+      minify: 'esbuild',
+      sourcemap: false,
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+          },
+        },
+      },
+      assetsInlineLimit: 4096,
+      chunkSizeWarningLimit: 500,
+    },
     plugins: [
       vue(),
+      viteCompression({
+        algorithm: 'gzip',
+        ext: '.gz',
+      }),
       AutoImport({
         imports: [
           'vue',
@@ -31,7 +53,6 @@ export default defineConfig(({ mode }) => {
               'ElForm',
               'ElScrollbar',
               'ElPopover',
-              'useId',
               ['default', 'ElementPlus'],
             ],
           },
@@ -39,6 +60,7 @@ export default defineConfig(({ mode }) => {
           {
             '@tanstack/vue-query': ['useQuery', 'useQueryClient', 'useMutation', 'VueQueryPlugin'],
           },
+          { uuidv4: ['uuid'] },
           {
             from: 'vue',
             imports: ['InjectionKey'],
@@ -91,7 +113,7 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "styles/main.scss";',
+          additionalData: '@import "styles/additional.scss";',
         },
       },
     },

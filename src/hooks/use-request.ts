@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import {
   getAccessToken,
   getRefreshToken,
@@ -37,15 +38,30 @@ const axiosInstance: AxiosInstance = axios.create({
   },
 });
 
-const handleSetNewToken = (response: App.Any): void => {
-  const { accessToken, refreshToken } = response;
-  setAccessToken(accessToken);
-  setRefreshToken(refreshToken);
+const handleRefreshToken = async (): Promise<Request.TokenResponse['accessToken']> => {
+  try {
+    const refreshToken = getRefreshToken();
+    const response = await axiosInstance.post<Request.TokenResponse>('/auth/refresh-token', {
+      refreshToken,
+    });
+    setAccessToken(response.data.accessToken);
+    setRefreshToken(response.data.refreshToken);
+    return response.data.accessToken;
+  } catch {
+    throw new Error('Refresh token invalid!');
+  }
 };
 
 const handleUnauthorized = (): void => {
   revokeUser();
   window.location.href = `${VUE_APP_API_URL}/sign-in`;
+};
+
+const shouldRefreshToken = (token: string): boolean => {
+  const { exp } = jwtDecode<Request.DecodedToken>(token);
+  const currentTime = Date.now() / 1000;
+  const ttl = exp - currentTime;
+  return ttl < (exp - currentTime) / 3;
 };
 
 const handleAccessTokenExpired = async (
@@ -64,10 +80,7 @@ const handleAccessTokenExpired = async (
   }
   isRefreshing = true;
   try {
-    const refreshToken = getRefreshToken();
-    const response = await axiosInstance.post('/auth/refresh-token', { refreshToken });
-    handleSetNewToken(response.data);
-    const { accessToken } = response.data;
+    const accessToken = await handleRefreshToken();
     axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     originalRequest.headers!['Authorization'] = `Bearer ${accessToken}`;
     processQueueRequest(null, accessToken);
@@ -103,6 +116,9 @@ axiosInstance.interceptors.request.use(
     const token = getAccessToken();
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
+      if (shouldRefreshToken(token)) {
+        handleRefreshToken();
+      }
     }
     return config;
   },

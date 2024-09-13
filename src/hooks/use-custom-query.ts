@@ -1,15 +1,9 @@
-import { MaybeRefDeep } from '@tanstack/vue-query/build/legacy/types';
-import type { UseQueryOptions, QueryObserverOptions } from '@tanstack/vue-query';
-
-type TInitialData<T> = MaybeRefDeep<T | InitialDataFunction<T>>;
-type IInitialValue<T> = TInitialData<T> | undefined;
-type TQueryOptions<T> = QueryObserverOptions<T> & UseQueryOptions<T>;
-
-export function useCustomQuery<T>(options: TQueryOptions<T>) {
+export function useCustomQuery<T>(options: CustomQuery.TQueryOptions<T>) {
   const { queryKey } = options;
   const queryClient: QueryClient = useQueryClient();
-  const initialValue: IInitialValue<T> = queryClient.getQueryData<TInitialData<T>>(queryKey);
-  const initialData = ref<IInitialValue<T>>(initialValue);
+  const initialValue: CustomQuery.IInitialValue<T> =
+    queryClient.getQueryData<CustomQuery.TInitialData<T>>(queryKey);
+  const initialData = ref<CustomQuery.IInitialValue<T>>(initialValue);
   const removeQueries = () => queryClient.removeQueries({ queryKey });
 
   const { data: queryData, ...queryResult } = useQuery<T>({

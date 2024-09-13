@@ -6,6 +6,7 @@ import AuthLayout from './layouts/AuthLayout.vue';
 import FontIcon from 'components/FontIcon';
 
 import 'element-plus/dist/index.css';
+import 'styles/main.scss';
 
 const pinia = createPinia();
 
