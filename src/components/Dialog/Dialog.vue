@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useAttrs, useSlots } from 'vue';
-import { ElDialog } from 'element-plus';
-
 type Props = {
   width?: number;
   title?: string;

@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { values } from 'lodash-es';
 import { setLocalStorage, getLocalStorage } from 'utils/storage';
 import { DEFAULT_LANGUAGE, VIETNAM_LANGUAGE } from 'config/constants';
 import resources from 'config/resources';
 import PopoverComponent from 'components/Popover';
-import { onMounted } from 'vue';
 
 const { locale, t } = useI18n();
 
@@ -55,7 +51,7 @@ const changeLocale = (lang: string) => {
       <template #default>
         <div class="select-language-content">
           <div
-            v-for="option in values(languageMap)"
+            v-for="option in Object.values(languageMap)"
             :key="option.value"
             class="select-language-content__item"
             @click="changeLocale(option.value)"

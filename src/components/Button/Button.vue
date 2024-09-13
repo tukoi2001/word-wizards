@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-import { useAttrs } from 'vue';
-import { ElButton } from 'element-plus';
-import { noop } from 'lodash-es';
-
 type Props = {
   type?: 'default' | 'primary' | 'danger';
   nativeType?: 'button' | 'submit' | 'reset';

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAttrs, useSlots, inject } from 'vue';
 import { APP_PROVIDER } from 'config/constants';
 
 type Props = {

@@ -1,14 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { ElForm } from 'element-plus';
-import { useI18n } from 'vue-i18n';
 import resources from 'config/resources';
 import { RootRouter } from 'enums/app';
 import { AuthStepLayout } from 'components/AuthStep';
 import InputComponent from 'components/Input';
 import ButtonComponent from 'components/Button';
 import useSignIn from './use-sign-in';
-import type { FormInstance } from 'element-plus';
 
 const { t } = useI18n();
 
@@ -65,7 +61,10 @@ const onValidatePassword = (): void => {
               in-form
               @input="onValidatePassword"
             />
-            <router-link class="sign-in-container__action" :to="{ name: RootRouter.SIGN_IN }">
+            <router-link
+              class="sign-in-container__action"
+              :to="{ name: RootRouter.FORGOT_PASSWORD }"
+            >
               {{ t('forgot_password') }}
             </router-link>
           </template>

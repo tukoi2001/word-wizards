@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { ref, useAttrs } from 'vue';
 import VOtpInput from 'vue3-otp-input';
-import { noop } from 'lodash-es';
 
 type Props = {
   numInputs?: number;

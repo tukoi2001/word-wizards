@@ -1,4 +1,3 @@
-import { RouteRecordRaw } from 'vue-router';
 import { RootRouter } from 'enums/app';
 
 const SignUpPage = () => import('pages/SignUpPage.vue');
@@ -7,7 +6,7 @@ const VerifyOTPPage = () => import('pages/VerifyOTPPage.vue');
 const ResetPasswordPage = () => import('pages/ResetPasswordPage.vue');
 const ForgotPasswordPage = () => import('pages/ForgotPasswordPage.vue');
 
-const authRoutes: Array<RouteRecordRaw> = [
+const authRoutes = [
   {
     path: '/sign-up',
     name: RootRouter.SIGN_UP,

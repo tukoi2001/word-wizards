@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { noop } from 'lodash-es';
-import { useI18n } from 'vue-i18n';
 import { VerifyOTPStep } from 'enums/auth';
 import { AuthStep, AuthDotStep } from 'components/AuthStep';
 import VerifyOtpStep from './VerifyOTPStep.vue';

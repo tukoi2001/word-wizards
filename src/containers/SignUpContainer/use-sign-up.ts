@@ -1,8 +1,5 @@
-import { computed, ref, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { SignUpStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
-import type { FormRules } from 'element-plus';
 
 export default function useSignUp() {
   const { t } = useI18n();

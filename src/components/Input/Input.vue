@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { useAttrs } from 'vue';
-import { ElInput, useId } from 'element-plus';
-import { noop } from 'lodash-es';
 import FieldCommon from 'components/FieldCommon';
 
 type Props = {

@@ -27,4 +27,8 @@ declare namespace Auth {
     token?: string;
     confirmNewPassword?: string;
   };
+
+  type User = {
+    //TODO:
+  };
 }

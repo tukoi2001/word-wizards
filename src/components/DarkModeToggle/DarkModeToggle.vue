@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
 import { APP_PROVIDER } from 'config/constants';
 import SwitchComponent from 'components/Switch';
 

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useSlots } from 'vue';
-import { ElScrollbar } from 'element-plus';
 import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
 import DarkModeToggle from 'components/DarkModeToggle';
