@@ -11,7 +11,7 @@ export function authMiddleware({ next, currentUser, isLoggedIn }: App.Middleware
   if (isLoggedIn) {
     return next();
   }
-  if (!currentUser.isActive) {
+  if (currentUser && !currentUser.isActive) {
     return next({ name: RootRouter.VERIFY_OTP });
   }
   return next({ name: RootRouter.SIGN_IN });
