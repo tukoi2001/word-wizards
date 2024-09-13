@@ -16,3 +16,8 @@ export enum Theme {
   DARK = 'Dark',
   LIGHT = 'Light',
 }
+
+export enum StatusCode {
+  UNAUTHORIZED = 401,
+  ACCESS_TOKEN_EXPIRED = 440,
+}

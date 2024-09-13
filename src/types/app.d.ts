@@ -24,4 +24,9 @@ declare namespace App {
     description: string;
     action: () => void;
   };
+
+  type QueuedRequest = {
+    resolve: (value: string | PromiseLike<string>) => void;
+    reject: (reason?: Any) => void;
+  };
 }

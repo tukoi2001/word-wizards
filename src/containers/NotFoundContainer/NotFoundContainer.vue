@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
 import DarkModeToggle from 'components/DarkModeToggle';

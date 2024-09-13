@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ElFormItem } from 'element-plus';
 import FieldCommonLabel from './FieldCommonLabel.vue';
 
 type Props = {

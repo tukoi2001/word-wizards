@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-import { useSlots, useAttrs } from 'vue';
-import { ElSwitch } from 'element-plus';
-import { noop } from 'lodash-es';
-
 type Props = {
   onChange?: (value: boolean) => void;
 };

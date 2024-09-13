@@ -1,5 +1,3 @@
-import { InjectionKey } from 'vue';
-
 export const PRIMARY_COLOR: string = '#7f56d9';
 // DARK MODE
 export const DARK_ACTIVE_COLOR: string = '#0C111D';

@@ -1,6 +1,3 @@
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
-import ElementPlus from 'element-plus';
 import router from 'config/router';
 import i18n from 'config/i18n';
 import App from './App.vue';
@@ -12,11 +9,22 @@ import 'element-plus/dist/index.css';
 
 const pinia = createPinia();
 
+const vueQueryPluginOptions: VueQueryPluginOptions = {
+  queryClientConfig: {
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  },
+};
+
 createApp(App)
   .use(pinia)
   .use(router)
   .use(ElementPlus)
   .use(i18n)
+  .use(VueQueryPlugin, vueQueryPluginOptions)
   .component('MainLayout', MainLayout)
   .component('AuthLayout', AuthLayout)
   .component('FontIcon', FontIcon)

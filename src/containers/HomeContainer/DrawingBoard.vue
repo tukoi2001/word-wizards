@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import useInteractionType from 'hooks/use-interaction-type';
 import { KeyCode } from 'enums/app';
 

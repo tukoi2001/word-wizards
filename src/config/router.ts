@@ -1,10 +1,3 @@
-import {
-  createRouter,
-  createWebHistory,
-  NavigationGuardNext,
-  RouteLocationNormalized,
-  RouteRecordRaw,
-} from 'vue-router';
 import { RootRouter } from 'enums/app';
 import authRoutes from 'routers/auth';
 import HomePage from 'pages/HomePage.vue';

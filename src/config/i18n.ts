@@ -1,4 +1,3 @@
-import { createI18n } from 'vue-i18n';
 import { DEFAULT_LANGUAGE } from 'config/constants';
 import langEn from 'i18n/en.json';
 import langVi from 'i18n/vi.json';

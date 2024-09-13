@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { ElForm } from 'element-plus';
-import { useI18n } from 'vue-i18n';
 import { RootRouter } from 'enums/app';
 import { SignUpStep } from 'enums/auth';
 import { AuthStep, AuthDotStep } from 'components/AuthStep';
@@ -10,7 +7,6 @@ import EmailStep from './EmailStep.vue';
 import PersonalStep from './PersonalStep.vue';
 import PasswordStep from './PasswordStep.vue';
 import AdditionalStep from './AdditionalStep.vue';
-import type { FormInstance } from 'element-plus';
 
 const { t } = useI18n();
 

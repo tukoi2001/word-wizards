@@ -1,4 +1,3 @@
-import { ref, onMounted } from 'vue';
 import { setLocalStorage, getLocalStorage } from 'utils/storage';
 import { Theme } from 'enums/app';
 import {

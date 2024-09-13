@@ -1,16 +1,9 @@
 <script lang="ts" setup>
-import { reactive, ref, computed } from 'vue';
-import { ElForm } from 'element-plus';
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
-import { noop } from 'lodash-es';
-
 import { RootRouter } from 'enums/app';
 import { ForgotPasswordStep } from 'enums/auth';
 import { AuthStepLayout, AuthStep, AuthDotStep } from 'components/AuthStep';
 import InputComponent from 'components/Input';
 import ButtonComponent from 'components/Button';
-import type { FormInstance, FormRules } from 'element-plus';
 
 const { t } = useI18n();
 const router = useRouter();

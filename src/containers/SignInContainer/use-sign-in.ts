@@ -1,7 +1,4 @@
-import { computed, ref, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { REGEX } from 'config/constants';
-import type { FormRules } from 'element-plus';
 
 export default function useSignIn() {
   const { t } = useI18n();
