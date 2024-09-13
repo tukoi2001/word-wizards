@@ -1,7 +1,13 @@
+import { useAuthStore } from 'stores/auth';
 import { REGEX } from 'config/constants';
+import { RootRouter } from 'enums/app';
+import { showError } from 'utils/toast';
 
 export default function useSignIn() {
   const { t } = useI18n();
+  const router = useRouter();
+  const authStore = useAuthStore();
+
   const isLoading = ref<boolean>(false);
 
   const formFields = reactive<Auth.SignInForm>({
@@ -40,7 +46,12 @@ export default function useSignIn() {
   }));
 
   const onSignIn = async (): Promise<void> => {
-    //TODO: Handle sign in
+    isLoading.value = true;
+    authStore.signIn(formFields, {
+      onSuccess: () => router.push({ name: RootRouter.HOME_PAGE }),
+      onError: (error) => showError(error.message),
+      onFinish: () => (isLoading.value = false),
+    });
   };
 
   return { isLoading, rules, formFields, onSignIn };

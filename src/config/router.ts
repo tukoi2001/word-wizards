@@ -1,5 +1,8 @@
-import { RootRouter } from 'enums/app';
+import { useAuthStore } from 'stores/auth';
 import authRoutes from 'routers/auth';
+import { authMiddleware } from 'routers/middleware';
+import { RootRouter } from 'enums/app';
+import { getAccessToken, getCurrentUser } from 'utils/auth-cookie';
 import HomePage from 'pages/HomePage.vue';
 
 const NotFoundPage = () => import('pages/NotFoundPage.vue');
@@ -11,6 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage,
     meta: {
       title: RootRouter.HOME_PAGE,
+      middleware: [authMiddleware],
     },
   },
   {
@@ -32,7 +36,25 @@ const router = createRouter({
 router.beforeEach(
   (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
     document.title = `Word Wizards - ${to.meta.title}`;
-    next();
+    const middlewares = get(to.meta, 'middleware') as App.RouteMiddleware[];
+    if (!middlewares) {
+      return next();
+    }
+    const authStore = useAuthStore();
+    const currentUser = getCurrentUser();
+    const accessToken = getAccessToken();
+    const isLoggedIn = Boolean(currentUser) && Boolean(accessToken);
+    const middleware = head(middlewares);
+    if (currentUser) {
+      authStore.setUserInfo(currentUser);
+    }
+    const middlewareContext: App.MiddlewareContext = {
+      to,
+      next,
+      currentUser,
+      isLoggedIn,
+    };
+    return middleware!(middlewareContext);
   }
 );
 

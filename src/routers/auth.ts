@@ -1,3 +1,4 @@
+import { guestMiddleWare } from './middleware';
 import { RootRouter } from 'enums/app';
 
 const SignUpPage = () => import('pages/SignUpPage.vue');
@@ -29,6 +30,7 @@ const authRoutes = [
     component: SignInPage,
     meta: {
       title: RootRouter.SIGN_IN,
+      middleware: [guestMiddleWare],
     },
   },
   {

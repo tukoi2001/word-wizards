@@ -53,14 +53,14 @@ export default defineConfig(({ mode }) => {
               'ElForm',
               'ElScrollbar',
               'ElPopover',
+              'ElNotification',
               ['default', 'ElementPlus'],
             ],
           },
-          { 'lodash-es': ['noop'] },
+          { 'lodash-es': ['noop', 'get', 'head'] },
           {
             '@tanstack/vue-query': ['useQuery', 'useQueryClient', 'useMutation', 'VueQueryPlugin'],
           },
-          { uuidv4: ['uuid'] },
           {
             from: 'vue',
             imports: ['InjectionKey'],
@@ -108,6 +108,7 @@ export default defineConfig(({ mode }) => {
         i18n: path.resolve(__dirname, 'src/i18n'),
         modals: path.resolve(__dirname, 'src/modals'),
         routers: path.resolve(__dirname, 'src/routers'),
+        stores: path.resolve(__dirname, 'src/stores'),
       },
     },
     css: {

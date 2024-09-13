@@ -14,3 +14,8 @@ export enum ForgotPasswordStep {
   RESET,
   DONE,
 }
+
+export enum AuthRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
