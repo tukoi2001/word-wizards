@@ -22,7 +22,7 @@ withDefaults(defineProps<Props>(), {
   onChange: noop,
 });
 const attrs = useAttrs();
-const id = useId();
+const id = uuid();
 </script>
 
 <template>

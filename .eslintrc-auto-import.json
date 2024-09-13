@@ -95,6 +95,7 @@
     "useRouter": true,
     "useSlots": true,
     "useTemplateRef": true,
+    "uuid": true,
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
