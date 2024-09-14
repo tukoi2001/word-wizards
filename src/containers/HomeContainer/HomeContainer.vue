@@ -7,5 +7,3 @@ import DrawingBoard from './DrawingBoard.vue';
     <drawing-board />
   </main-layout>
 </template>
-
-<style scoped lang="scss"></style>
