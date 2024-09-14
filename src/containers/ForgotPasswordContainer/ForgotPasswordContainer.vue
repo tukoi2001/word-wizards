@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { forgotPassword } from 'api/auth';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
 import { RootRouter } from 'enums/app';
 import { ForgotPasswordStep } from 'enums/auth';
 import { AuthStepLayout, AuthStep, AuthDotStep } from 'components/AuthStep';
@@ -9,7 +11,6 @@ const { t } = useI18n();
 const router = useRouter();
 
 const currentStep = ref<ForgotPasswordStep>(ForgotPasswordStep.RESET);
-const isLoading = ref<boolean>(false);
 const formRef = ref<FormInstance>();
 const isValidEmail = ref<boolean>(false);
 
@@ -48,13 +49,18 @@ const steps = computed<App.AuthStep[]>(() => [
   },
 ]);
 
+const { isPending, mutate: handleForgotPassword } = useMutation({
+  mutationKey: ['forgotPassword', formFields],
+  mutationFn: () => forgotPassword(formFields),
+  onSuccess: (data: App.BaseResponse) => {
+    showSuccessMessage(data);
+    onSwitchStep(ForgotPasswordStep.DONE);
+  },
+  onError: (error: App.ErrorResponse) => showErrorMessage(error),
+});
+
 const onSwitchStep = (step: ForgotPasswordStep): void => {
   currentStep.value = step;
-};
-
-const onForgotPassword = async (): Promise<void> => {
-  //TODO: Handle forgot password
-  onSwitchStep(ForgotPasswordStep.DONE);
 };
 
 const onValidateEmail = (): void => {
@@ -97,6 +103,7 @@ const onGoHome = (): void => {
                     field: t('email_address').toLowerCase(),
                   })
                 "
+                :disabled="isPending"
                 in-form
                 @input="onValidateEmail"
               />
@@ -105,9 +112,9 @@ const onGoHome = (): void => {
               <button-component
                 size="default"
                 is-full-width
-                :loading="isLoading"
+                :loading="isPending"
                 :disabled="!isValidEmail"
-                :on-click="onForgotPassword"
+                :on-click="handleForgotPassword"
               >
                 {{ t('reset_password') }}
               </button-component>

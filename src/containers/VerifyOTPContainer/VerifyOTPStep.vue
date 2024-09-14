@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { verifyOtp, resendOtp } from 'api/auth';
 import { useAuthStore } from 'stores/auth';
-import { showSuccess } from 'utils/toast';
-import { showErrorMessage } from 'utils/message-error';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
 import otpInput from 'components/OTP';
 import { AuthStepLayout } from 'components/AuthStep';
 
@@ -23,7 +22,7 @@ const { isPending: isVerifying, mutate: handleVerifyOtp } = useMutation({
     verifyOtp({ email: authStore.currentUserEmail, otp }),
   onSuccess: (data: App.BaseResponse) => {
     authStore.setUserInfo({ ...authStore.currentUser!, isActive: true });
-    showSuccess(data.message as string);
+    showSuccessMessage(data);
     props.onVerifySuccess();
   },
   onError: (error: App.ErrorResponse) => showErrorMessage(error),
@@ -33,7 +32,7 @@ const { isPending: isResending, mutate: handleResendOtp } = useMutation({
   mutationKey: ['resendOtp', authStore.currentUserEmail],
   mutationFn: () => resendOtp({ email: authStore.currentUserEmail }),
   onSuccess: (data: App.BaseResponse) => {
-    showSuccess(data.message as string);
+    showSuccessMessage(data);
   },
   onError: (error: App.ErrorResponse) => showErrorMessage(error),
 });
