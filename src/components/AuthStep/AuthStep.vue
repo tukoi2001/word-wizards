@@ -15,14 +15,26 @@ defineProps<Props>();
       :class="['auth-step-item', { 'is-disabled': currentStep < index }]"
       @click="step.action"
     >
-      <div :class="['auth-step-item__icon', { 'is-active': currentStep === index }]">
+      <div
+        :class="[
+          'auth-step-item__icon',
+          { 'is-active': currentStep === index },
+        ]"
+      >
         <font-icon
           :name="step.icon"
-          :color="currentStep === index ? '#602ecc' : 'var(--text-tertiary-color)'"
+          :color="
+            currentStep === index ? '#602ecc' : 'var(--text-tertiary-color)'
+          "
           :size="24"
         />
       </div>
-      <div :class="['auth-step-item__content', { 'is-active': currentStep === index }]">
+      <div
+        :class="[
+          'auth-step-item__content',
+          { 'is-active': currentStep === index },
+        ]"
+      >
         <div class="auth-step-item__title">{{ step.title }}</div>
         <div class="auth-step-item__description">{{ step.description }}</div>
       </div>

@@ -22,7 +22,11 @@ const { t } = useI18n();
       <button-component type="default" size="default" :on-click="onCancelModal">
         {{ t('cancel') }}
       </button-component>
-      <button-component size="default" :loading="isLoading" :on-click="onSignUp">
+      <button-component
+        size="default"
+        :loading="isLoading"
+        :on-click="onSignUp"
+      >
         {{ t('get_started') }}
       </button-component>
     </template>

@@ -6,7 +6,11 @@ const { isDarkMode, toggleTheme } = inject(APP_PROVIDER.darkMode)!;
 </script>
 
 <template>
-  <switch-component v-model="isDarkMode" size="default" :onChange="toggleTheme">
+  <switch-component
+    v-model="isDarkMode"
+    size="default"
+    :on-change="toggleTheme"
+  >
     <template #activeAction>
       <font-icon name="dark-mode" />
     </template>

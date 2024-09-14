@@ -44,6 +44,7 @@
     "defineComponent": true,
     "defineStore": true,
     "effectScope": true,
+    "forEach": true,
     "get": true,
     "getCurrentInstance": true,
     "getCurrentScope": true,

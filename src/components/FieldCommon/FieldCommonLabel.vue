@@ -14,7 +14,9 @@ const { t } = useI18n();
   <div class="field-common">
     <label v-if="!!label" class="field-common__label" :for="id">
       {{ label }}
-      <span v-if="isOptional" class="field-common__label--optional">({{ t('optional') }})</span>
+      <span v-if="isOptional" class="field-common__label--optional"
+        >({{ t('optional') }})</span
+      >
     </label>
     <slot></slot>
   </div>

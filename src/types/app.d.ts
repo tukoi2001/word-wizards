@@ -3,6 +3,7 @@ declare namespace App {
 
   import type { NotificationType, StatusCode } from 'enums/app';
 
+  // eslint-disable-next-line
   type Any = any;
 
   type Callback = {
@@ -35,10 +36,7 @@ declare namespace App {
     action: () => void;
   };
 
-  type QueuedRequest = {
-    resolve: (value: string | PromiseLike<string>) => void;
-    reject: (reason?: Any) => void;
-  };
+  type PendingRequest = (token: string) => Promise<void>;
 
   type ToastOptions = {
     title?: string;
@@ -62,5 +60,10 @@ declare namespace App {
     message: string | string[];
     statusCode?: StatusCode;
     error?: string;
+  };
+
+  type BaseResponse = {
+    message: string | string[];
+    statusCode?: StatusCode;
   };
 }

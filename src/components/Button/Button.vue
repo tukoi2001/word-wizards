@@ -23,7 +23,7 @@ const attrs = useAttrs();
     :class="['button-component', { 'is-full-width': isFullWidth }]"
     :size="size"
     :type="type"
-    :nativeType="nativeType"
+    :native-type="nativeType"
     @click="onClick"
   >
     <slot></slot>

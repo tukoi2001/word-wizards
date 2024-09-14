@@ -4,6 +4,7 @@ import App from './App.vue';
 import MainLayout from 'layouts/MainLayout.vue';
 import AuthLayout from './layouts/AuthLayout.vue';
 import FontIcon from 'components/FontIcon';
+import LoadingComponent from 'components/Loading';
 
 import 'element-plus/dist/index.css';
 import 'styles/main.scss';
@@ -29,4 +30,5 @@ createApp(App)
   .component('MainLayout', MainLayout)
   .component('AuthLayout', AuthLayout)
   .component('FontIcon', FontIcon)
+  .component('LoadingComponent', LoadingComponent)
   .mount('#app');

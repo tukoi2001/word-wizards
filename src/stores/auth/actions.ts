@@ -1,9 +1,16 @@
 import { signIn, signUp } from 'api/auth';
-import { setAccessToken, setRefreshToken, setUserInfo } from 'utils/auth-cookie';
+import {
+  setAccessToken,
+  setRefreshToken,
+  setUserInfo,
+} from 'utils/auth-cookie';
 import type { AuthStoreOptions } from './types';
 
 const actions: AuthStoreOptions['actions'] = {
-  async signIn(formFields: Auth.SignInForm, callback: App.Callback): Promise<void> {
+  async signIn(
+    formFields: Auth.SignInForm,
+    callback: App.Callback,
+  ): Promise<void> {
     const onSuccess = get(callback, 'onSuccess', noop);
     const onError = get(callback, 'onError', noop);
     const onFinally = get(callback, 'onFinally', noop);
@@ -19,7 +26,10 @@ const actions: AuthStoreOptions['actions'] = {
     }
   },
 
-  async signUp(formFields: Auth.SignUpForm, callback: App.Callback): Promise<void> {
+  async signUp(
+    formFields: Auth.SignUpForm,
+    callback: App.Callback,
+  ): Promise<void> {
     const onSuccess = get(callback, 'onSuccess', noop);
     const onError = get(callback, 'onError', noop);
     const onFinally = get(callback, 'onFinally', noop);

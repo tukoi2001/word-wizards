@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--overlay-color);
   z-index: 1;
 }
 
@@ -28,7 +28,8 @@
 .loader::after {
   content: '';
   grid-area: 1/1;
-  --c: no-repeat radial-gradient(farthest-side, var(--primary-color) 92%, transparent);
+  --c: no-repeat
+    radial-gradient(farthest-side, var(--primary-color) 92%, transparent);
   background:
     var(--c) 50% 0,
     var(--c) 50% 100%,

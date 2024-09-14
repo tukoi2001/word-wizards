@@ -20,7 +20,9 @@ export default function useSignIn() {
       {
         required: true,
         whitespace: true,
-        message: t('required_field', { field: t('email_address').toLowerCase() }),
+        message: t('required_field', {
+          field: t('email_address').toLowerCase(),
+        }),
         trigger: ['blur', 'change'],
       },
       {

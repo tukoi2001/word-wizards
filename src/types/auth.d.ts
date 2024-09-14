@@ -22,6 +22,7 @@ declare namespace Auth {
 
   type OTPForm = {
     otp: string;
+    email: string;
   };
 
   type ForgotPasswordForm = {
@@ -42,7 +43,7 @@ declare namespace Auth {
     createdAt: Date;
     updatedAt: Date;
     role: AuthRole;
-    isActive: Boolean;
+    isActive: boolean;
   };
 
   type SignInResponse = Request.TokenResponse & {

@@ -31,12 +31,12 @@ defineExpose({
   <v-otp-input
     v-bind="attrs"
     ref="otpInput"
-    :numInputs="numInputs"
-    :inputType="inputType"
-    inputClasses="otp-input"
-    :shouldAutoFocus="shouldAutoFocus"
-    :shouldFocusOrder="shouldFocusOrder"
-    :isDisabled="false"
+    :num-inputs="numInputs"
+    :input-type="inputType"
+    input-classes="otp-input"
+    :should-auto-focus="shouldAutoFocus"
+    :should-focus-order="shouldFocusOrder"
+    :is-disabled="false"
     @on-change="onChange"
     @on-complete="onComplete"
   />

@@ -34,14 +34,23 @@ export default function useToggleTheme() {
       root.style.setProperty('--active-color', LIGHT_ACTIVE_COLOR);
       root.style.setProperty('--secondary-color', LIGHT_SECONDARY_COLOR);
       root.style.setProperty('--text-primary-color', DARK_ACTIVE_COLOR);
-      root.style.setProperty('--text-secondary-color', LIGHT_TEXT_SECONDARY_COLOR);
-      root.style.setProperty('--text-tertiary-color', LIGHT_TEXT_TERTIARY_COLOR);
+      root.style.setProperty(
+        '--text-secondary-color',
+        LIGHT_TEXT_SECONDARY_COLOR,
+      );
+      root.style.setProperty(
+        '--text-tertiary-color',
+        LIGHT_TEXT_TERTIARY_COLOR,
+      );
       root.style.setProperty('--overlay-color', LIGHT_OVERLAY_COLOR);
     } else {
       root.style.setProperty('--active-color', DARK_ACTIVE_COLOR);
       root.style.setProperty('--secondary-color', DARK_SECONDARY_COLOR);
       root.style.setProperty('--text-primary-color', LIGHT_ACTIVE_COLOR);
-      root.style.setProperty('--text-secondary-color', DARK_TEXT_SECONDARY_COLOR);
+      root.style.setProperty(
+        '--text-secondary-color',
+        DARK_TEXT_SECONDARY_COLOR,
+      );
       root.style.setProperty('--text-tertiary-color', DARK_TEXT_TERTIARY_COLOR);
       root.style.setProperty('--overlay-color', DARK_OVERLAY_COLOR);
     }

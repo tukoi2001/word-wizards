@@ -71,13 +71,16 @@ const onGoHome = (): void => {
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent="">
     <auth-layout>
       <template #sidebar>
-        <auth-step :currentStep="currentStep" :steps="steps" />
+        <auth-step :current-step="currentStep" :steps="steps" />
       </template>
       <div name="slide-fade" class="forgot-password-container">
-        <transition name="slide-fade" class="forgot-password-container__content">
+        <transition
+          name="slide-fade"
+          class="forgot-password-container__content"
+        >
           <auth-step-layout
             v-if="currentStep === ForgotPasswordStep.RESET"
             :title="t('forgot_password')"
@@ -89,7 +92,11 @@ const onGoHome = (): void => {
                 v-model="formFields.email"
                 name="email"
                 :label="t('email_address')"
-                :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
+                :placeholder="
+                  t('enter_your_field', {
+                    field: t('email_address').toLowerCase(),
+                  })
+                "
                 in-form
                 @input="onValidateEmail"
               />
@@ -100,7 +107,7 @@ const onGoHome = (): void => {
                 is-full-width
                 :loading="isLoading"
                 :disabled="!isValidEmail"
-                :onClick="onForgotPassword"
+                :on-click="onForgotPassword"
               >
                 {{ t('reset_password') }}
               </button-component>
@@ -113,7 +120,11 @@ const onGoHome = (): void => {
             icon="check-circle"
           >
             <template #action>
-              <button-component size="default" is-full-width :onClick="onGoHome">
+              <button-component
+                size="default"
+                is-full-width
+                :on-click="onGoHome"
+              >
                 {{ t('continue') }}
               </button-component>
             </template>
@@ -131,7 +142,7 @@ const onGoHome = (): void => {
           </router-link>
         </div>
       </div>
-      <auth-dot-step :currentStep="currentStep" :steps="steps" />
+      <auth-dot-step :current-step="currentStep" :steps="steps" />
     </auth-layout>
   </el-form>
 </template>

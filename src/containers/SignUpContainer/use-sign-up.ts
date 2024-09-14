@@ -28,7 +28,9 @@ export default function useSignUp() {
       {
         required: true,
         whitespace: true,
-        message: t('required_field', { field: t('email_address').toLowerCase() }),
+        message: t('required_field', {
+          field: t('email_address').toLowerCase(),
+        }),
         trigger: ['blur', 'change'],
       },
       {
@@ -47,7 +49,11 @@ export default function useSignUp() {
       {
         min: 2,
         max: 50,
-        message: t('between_error', { field: t('first_name').toLowerCase(), min: 2, max: 50 }),
+        message: t('between_error', {
+          field: t('first_name').toLowerCase(),
+          min: 2,
+          max: 50,
+        }),
         trigger: ['blur', 'change'],
       },
     ],
@@ -61,7 +67,11 @@ export default function useSignUp() {
       {
         min: 2,
         max: 50,
-        message: t('between_error', { field: t('last_name').toLowerCase(), min: 2, max: 50 }),
+        message: t('between_error', {
+          field: t('last_name').toLowerCase(),
+          min: 2,
+          max: 50,
+        }),
         trigger: ['blur', 'change'],
       },
     ],
@@ -82,7 +92,9 @@ export default function useSignUp() {
       {
         required: true,
         whitespace: true,
-        message: t('required_field', { field: t('password_confirm').toLowerCase() }),
+        message: t('required_field', {
+          field: t('password_confirm').toLowerCase(),
+        }),
         trigger: ['blur', 'change'],
       },
       {
@@ -104,7 +116,11 @@ export default function useSignUp() {
         whitespace: true,
         min: 2,
         max: 50,
-        message: t('between_error', { field: t('address').toLowerCase(), min: 2, max: 50 }),
+        message: t('between_error', {
+          field: t('address').toLowerCase(),
+          min: 2,
+          max: 50,
+        }),
         trigger: ['blur', 'change'],
       },
     ],
@@ -185,5 +201,14 @@ export default function useSignUp() {
     });
   };
 
-  return { currentStep, isLoading, rules, formFields, steps, onChangeStep, onBackStep, onSignUp };
+  return {
+    currentStep,
+    isLoading,
+    rules,
+    formFields,
+    steps,
+    onChangeStep,
+    onBackStep,
+    onSignUp,
+  };
 }

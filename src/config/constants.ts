@@ -20,6 +20,7 @@ export const APP_PROVIDER = {
 };
 // REGEX
 export const REGEX: Record<'password' | 'phoneNumber', RegExp> = {
-  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  password:
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
   phoneNumber: /^(\+?\d{1,4}[-.\s]?)?(\(?\d{1,4}\)?[-.\s]?)?[\d\s-]{9,15}$/,
 };

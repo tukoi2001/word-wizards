@@ -20,7 +20,10 @@ const onGoHome = (): void => {
 <template>
   <div class="not-found-container">
     <div class="not-found-container-header">
-      <router-link class="not-found-container-header__link" :to="{ name: RootRouter.HOME_PAGE }">
+      <router-link
+        class="not-found-container-header__link"
+        :to="{ name: RootRouter.HOME_PAGE }"
+      >
         <img :src="resources.APP_LOGO" alt="app-logo" />
         <span>Word Wizards</span>
       </router-link>
@@ -40,10 +43,10 @@ const onGoHome = (): void => {
         {{ t('page_not_found_description') }}
       </div>
       <div class="not-found-container-main__action">
-        <button-component type="default" size="default" :onClick="onGoBack">
+        <button-component type="default" size="default" :on-click="onGoBack">
           {{ t('go_back') }}
         </button-component>
-        <button-component size="default" :onClick="onGoHome">
+        <button-component size="default" :on-click="onGoHome">
           {{ t('take_me_home') }}
         </button-component>
       </div>

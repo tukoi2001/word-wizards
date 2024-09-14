@@ -9,7 +9,9 @@ type Props = {
   label?: string;
   inForm?: boolean;
   isOptional: boolean;
-  onChange?: (value: App.SelectOption['value'] | App.SelectOption['value'][]) => void;
+  onChange?: (
+    value: App.SelectOption['value'] | App.SelectOption['value'][],
+  ) => void;
 };
 
 withDefaults(defineProps<Props>(), {
@@ -24,8 +26,19 @@ const id = uuidv4();
 </script>
 
 <template>
-  <field-common :id="id" :in-form="inForm" :name="name" :label="label" :is-optional="isOptional">
-    <el-select v-bind="attrs" :class="['select-component']" fit-input-width @change="onChange">
+  <field-common
+    :id="id"
+    :in-form="inForm"
+    :name="name"
+    :label="label"
+    :is-optional="isOptional"
+  >
+    <el-select
+      v-bind="attrs"
+      :class="['select-component']"
+      fit-input-width
+      @change="onChange"
+    >
       <el-option
         v-for="option in options"
         :key="String(option.value)"
