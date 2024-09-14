@@ -70,11 +70,9 @@ declare global {
   const shallowReactive: (typeof import('vue'))['shallowReactive'];
   const shallowReadonly: (typeof import('vue'))['shallowReadonly'];
   const shallowRef: (typeof import('vue'))['shallowRef'];
-  const split: (typeof import('lodash-es'))['split'];
   const toRaw: (typeof import('vue'))['toRaw'];
   const toRef: (typeof import('vue'))['toRef'];
   const toRefs: (typeof import('vue'))['toRefs'];
-  const toString: (typeof import('lodash-es'))['toString'];
   const toValue: (typeof import('vue'))['toValue'];
   const triggerRef: (typeof import('vue'))['triggerRef'];
   const unref: (typeof import('vue'))['unref'];
