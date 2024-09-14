@@ -27,7 +27,13 @@ const id = uuidv4();
 </script>
 
 <template>
-  <field-common :id="id" :inForm="inForm" :name="name" :label="label" :isOptional="isOptional">
+  <field-common
+    :id="id"
+    :in-form="inForm"
+    :name="name"
+    :label="label"
+    :is-optional="isOptional"
+  >
     <el-input
       v-bind="attrs"
       :type="type"

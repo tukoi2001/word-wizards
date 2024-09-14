@@ -38,7 +38,14 @@ export default defineConfig(({ mode }) => {
       AutoImport({
         imports: [
           'vue',
-          { 'vue-router': ['useRoute', 'useRouter', 'createRouter', 'createWebHistory'] },
+          {
+            'vue-router': [
+              'useRoute',
+              'useRouter',
+              'createRouter',
+              'createWebHistory',
+            ],
+          },
           { 'vue-i18n': ['createI18n', 'useI18n'] },
           { pinia: ['createPinia', 'defineStore'] },
           {
@@ -57,9 +64,24 @@ export default defineConfig(({ mode }) => {
               ['default', 'ElementPlus'],
             ],
           },
-          { 'lodash-es': ['noop', 'get', 'head', 'omit', 'isArray', 'join'] },
           {
-            '@tanstack/vue-query': ['useQuery', 'useQueryClient', 'useMutation', 'VueQueryPlugin'],
+            'lodash-es': [
+              'noop',
+              'get',
+              'head',
+              'omit',
+              'isArray',
+              'join',
+              'forEach',
+            ],
+          },
+          {
+            '@tanstack/vue-query': [
+              'useQuery',
+              'useQueryClient',
+              'useMutation',
+              'VueQueryPlugin',
+            ],
           },
           {
             from: 'vue',
@@ -68,7 +90,11 @@ export default defineConfig(({ mode }) => {
           },
           {
             from: 'vue-router',
-            imports: ['RouteRecordRaw', 'RouteLocationNormalized', 'NavigationGuardNext'],
+            imports: [
+              'RouteRecordRaw',
+              'RouteLocationNormalized',
+              'NavigationGuardNext',
+            ],
             type: true,
           },
           {
@@ -78,7 +104,11 @@ export default defineConfig(({ mode }) => {
           },
           {
             from: '@tanstack/vue-query',
-            imports: ['InitialDataFunction', 'QueryClient', 'VueQueryPluginOptions'],
+            imports: [
+              'InitialDataFunction',
+              'QueryClient',
+              'VueQueryPluginOptions',
+            ],
             type: true,
           },
         ],

@@ -12,7 +12,11 @@ defineProps<Props>();
   <div class="auth-step-layout">
     <div class="auth-step-layout-header">
       <div v-if="!!icon" class="auth-step-layout-header__icon">
-        <font-icon :name="icon" color="var(--text-secondary-color)" :size="32" />
+        <font-icon
+          :name="icon"
+          color="var(--text-secondary-color)"
+          :size="32"
+        />
       </div>
       <div class="auth-step-layout-header__title">
         {{ title }}

@@ -4,7 +4,9 @@ export type State = {
   currentUser: Auth.User | null;
 };
 
-export type Getters = {};
+export type Getters = {
+  currentUserEmail(state: State): string;
+};
 
 export type Actions = {
   signIn(formFields: Auth.SignInForm, callback: App.Callback): Promise<void>;
@@ -14,4 +16,9 @@ export type Actions = {
   reset(): void;
 };
 
-export type AuthStoreOptions = DefineStoreOptions<string, State, Getters, Actions>;
+export type AuthStoreOptions = DefineStoreOptions<
+  string,
+  State,
+  Getters,
+  Actions
+>;

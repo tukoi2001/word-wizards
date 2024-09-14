@@ -10,8 +10,16 @@ import AdditionalStep from './AdditionalStep.vue';
 
 const { t } = useI18n();
 
-const { currentStep, isLoading, rules, formFields, steps, onChangeStep, onBackStep, onSignUp } =
-  useSignUp();
+const {
+  currentStep,
+  isLoading,
+  rules,
+  formFields,
+  steps,
+  onChangeStep,
+  onBackStep,
+  onSignUp,
+} = useSignUp();
 
 const formRef = ref<FormInstance>();
 </script>
@@ -19,9 +27,14 @@ const formRef = ref<FormInstance>();
 <template>
   <auth-layout>
     <template #sidebar>
-      <auth-step :currentStep="currentStep" :steps="steps" />
+      <auth-step :current-step="currentStep" :steps="steps" />
     </template>
-    <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+    <el-form
+      ref="formRef"
+      :model="formFields"
+      :rules="rules"
+      @submit.prevent=""
+    >
       <div class="sign-up-right">
         <transition name="slide-fade" class="sign-up-right__content">
           <email-step
@@ -57,14 +70,19 @@ const formRef = ref<FormInstance>();
           />
         </transition>
         <div class="sign-up-right-footer">
-          <span class="sign-up-right-footer__title">{{ t('already_have_an_account') }}</span>
-          <router-link class="sign-up-right-footer__link" :to="{ name: RootRouter.SIGN_IN }">
+          <span class="sign-up-right-footer__title">{{
+            t('already_have_an_account')
+          }}</span>
+          <router-link
+            class="sign-up-right-footer__link"
+            :to="{ name: RootRouter.SIGN_IN }"
+          >
             {{ t('login') }}
           </router-link>
         </div>
       </div>
     </el-form>
-    <auth-dot-step :currentStep="currentStep" :steps="steps" />
+    <auth-dot-step :current-step="currentStep" :steps="steps" />
   </auth-layout>
 </template>
 

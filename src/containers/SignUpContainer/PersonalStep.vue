@@ -55,7 +55,9 @@ const onValidateLastName = (): void => {
         v-model="firstName"
         name="firstName"
         :label="t('first_name')"
-        :placeholder="t('enter_your_field', { field: t('first_name').toLowerCase() })"
+        :placeholder="
+          t('enter_your_field', { field: t('first_name').toLowerCase() })
+        "
         in-form
         @input="onValidateFirstName"
       />
@@ -63,20 +65,27 @@ const onValidateLastName = (): void => {
         v-model="lastName"
         name="lastName"
         :label="t('last_name')"
-        :placeholder="t('enter_your_field', { field: t('last_name').toLowerCase() })"
+        :placeholder="
+          t('enter_your_field', { field: t('last_name').toLowerCase() })
+        "
         in-form
         @input="onValidateLastName"
       />
     </template>
     <template #action>
-      <button-component type="default" size="default" isFullWidth :onClick="onBackStep">
+      <button-component
+        type="default"
+        size="default"
+        is-full-width
+        :on-click="onBackStep"
+      >
         {{ t('back') }}
       </button-component>
       <button-component
         size="default"
         is-full-width
         :disabled="!isValidFirstName || !isValidLastName"
-        :onClick="onChangeStep"
+        :on-click="onChangeStep"
       >
         {{ t('continue') }}
       </button-component>

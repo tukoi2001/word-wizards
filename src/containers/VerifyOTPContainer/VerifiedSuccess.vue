@@ -18,10 +18,12 @@ const onDone = (): void => {
     icon="verified-user"
   >
     <template #content>
-      <div class="verify-success-content">{{ t('welcome_to_word_wizards_description') }}</div>
+      <div class="verify-success-content">
+        {{ t('welcome_to_word_wizards_description') }}
+      </div>
     </template>
     <template #action>
-      <button-component size="default" isFullWidth :onClick="onDone">
+      <button-component size="default" is-full-width :on-click="onDone">
         {{ t('welcome_to_word_wizards') }}
       </button-component>
     </template>

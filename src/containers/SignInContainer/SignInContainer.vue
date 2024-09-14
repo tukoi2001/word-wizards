@@ -32,7 +32,7 @@ const onValidatePassword = (): void => {
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent="">
     <auth-layout>
       <div class="sign-in-container">
         <div class="sign-in-container-header">
@@ -47,7 +47,11 @@ const onValidatePassword = (): void => {
               v-model="formFields.email"
               name="email"
               :label="t('email_address')"
-              :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
+              :placeholder="
+                t('enter_your_field', {
+                  field: t('email_address').toLowerCase(),
+                })
+              "
               in-form
               @input="onValidateEmail"
             />
@@ -56,7 +60,9 @@ const onValidatePassword = (): void => {
               name="password"
               type="password"
               :label="t('password')"
-              :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
+              :placeholder="
+                t('enter_your_field', { field: t('password').toLowerCase() })
+              "
               show-password
               in-form
               @input="onValidatePassword"
@@ -71,18 +77,23 @@ const onValidatePassword = (): void => {
           <template #action>
             <button-component
               size="default"
-              isFullWidth
+              is-full-width
               :loading="isLoading"
               :disabled="!isValidPassword || !isValidEmail"
-              :onClick="onSignIn"
+              :on-click="onSignIn"
             >
               {{ t('sign_in') }}
             </button-component>
           </template>
         </auth-step-layout>
         <div class="sign-in-container-footer">
-          <span class="sign-in-container-footer__title">{{ t('do_not_have_an_account') }}</span>
-          <router-link class="sign-in-container-footer__link" :to="{ name: RootRouter.SIGN_UP }">
+          <span class="sign-in-container-footer__title">{{
+            t('do_not_have_an_account')
+          }}</span>
+          <router-link
+            class="sign-in-container-footer__link"
+            :to="{ name: RootRouter.SIGN_UP }"
+          >
             {{ t('sign_up') }}
           </router-link>
         </div>

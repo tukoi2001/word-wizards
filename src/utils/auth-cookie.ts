@@ -29,7 +29,7 @@ export const setUserInfo = (user: Auth.User): void => {
   setCookie('userInfo', encryptData);
 };
 
-export const revokeUser = () => {
+export const revokeAuthentication = () => {
   removeCookie('token');
   removeCookie('refreshToken');
   removeCookie('userInfo');

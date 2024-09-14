@@ -34,20 +34,24 @@ const router = createRouter({
 });
 
 router.beforeEach(
-  (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
+  (
+    to: RouteLocationNormalized,
+    _from: RouteLocationNormalized,
+    next: NavigationGuardNext,
+  ) => {
     document.title = `Word Wizards - ${to.meta.title}`;
     const middlewares = get(to.meta, 'middleware') as App.RouteMiddleware[];
-    if (!middlewares) {
-      return next();
-    }
     const authStore = useAuthStore();
     const currentUser = getCurrentUser();
     const accessToken = getAccessToken();
     const isLoggedIn = Boolean(currentUser) && Boolean(accessToken);
-    const middleware = head(middlewares);
     if (currentUser) {
       authStore.setUserInfo(currentUser);
     }
+    if (!middlewares) {
+      return next();
+    }
+    const middleware = head(middlewares);
     const middlewareContext: App.MiddlewareContext = {
       to,
       next,
@@ -55,7 +59,7 @@ router.beforeEach(
       isLoggedIn,
     };
     return middleware!(middlewareContext);
-  }
+  },
 );
 
 export default router;

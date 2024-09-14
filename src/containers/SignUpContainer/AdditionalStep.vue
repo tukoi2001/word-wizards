@@ -3,7 +3,9 @@ import InputComponent from 'components/Input';
 import ButtonComponent from 'components/Button';
 import { AuthStepLayout } from 'components/AuthStep';
 
-const SkipAdditionalModal = defineAsyncComponent(() => import('modals/SkipAdditionalModal'));
+const SkipAdditionalModal = defineAsyncComponent(
+  () => import('modals/SkipAdditionalModal'),
+);
 
 type Props = {
   formRef: App.Any;
@@ -21,9 +23,13 @@ const isValidPhoneNumber = ref<boolean>(true);
 const isValidAddress = ref<boolean>(true);
 const isShowSkipAdditionalModal = ref<boolean>(false);
 
-const isEmptyValue = computed<boolean>(() => !address.value || !phoneNumber.value);
+const isEmptyValue = computed<boolean>(
+  () => !address.value || !phoneNumber.value,
+);
 
-const buttonLabel = computed<string>(() => (isEmptyValue.value ? t('skip') : t('get_started')));
+const buttonLabel = computed<string>(() =>
+  isEmptyValue.value ? t('skip') : t('get_started'),
+);
 
 onMounted(() => {
   if (phoneNumber.value) {
@@ -71,8 +77,10 @@ const onContinue = (): void => {
           v-model="phoneNumber"
           name="phoneNumber"
           :label="t('phone_number')"
-          :placeholder="t('enter_your_field', { field: t('phone_number').toLowerCase() })"
-          isOptional
+          :placeholder="
+            t('enter_your_field', { field: t('phone_number').toLowerCase() })
+          "
+          is-optional
           in-form
           @input="onValidatePhoneNumber"
         />
@@ -80,21 +88,28 @@ const onContinue = (): void => {
           v-model="address"
           name="address"
           :label="t('address')"
-          :placeholder="t('enter_your_field', { field: t('address').toLowerCase() })"
+          :placeholder="
+            t('enter_your_field', { field: t('address').toLowerCase() })
+          "
           is-optional
           in-form
           @input="onValidateAddress"
         />
       </template>
       <template #action>
-        <button-component type="default" size="default" isFullWidth :onClick="onBackStep">
+        <button-component
+          type="default"
+          size="default"
+          is-full-width
+          :on-click="onBackStep"
+        >
           {{ t('back') }}
         </button-component>
         <button-component
           size="default"
           :disabled="!isValidPhoneNumber || !isValidAddress"
           is-full-width
-          :onClick="onContinue"
+          :on-click="onContinue"
         >
           {{ buttonLabel }}
         </button-component>

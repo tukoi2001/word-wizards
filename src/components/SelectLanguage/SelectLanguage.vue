@@ -23,7 +23,9 @@ const languageMap = computed<Record<string, App.LanguageOption>>(() => ({
   },
 }));
 
-const language = computed<App.LanguageOption>(() => languageMap.value[currentLanguage.value]);
+const language = computed<App.LanguageOption>(
+  () => languageMap.value[currentLanguage.value],
+);
 
 onMounted(() => {
   if (currentLocate) {
@@ -45,7 +47,7 @@ const changeLocale = (lang: string) => {
     <popover-component
       v-model:visible="isVisible"
       trigger="click"
-      :popperStyle="{ padding: 0 }"
+      :popper-style="{ padding: 0 }"
       :width="100"
     >
       <template #default>
@@ -56,15 +58,27 @@ const changeLocale = (lang: string) => {
             class="select-language-content__item"
             @click="changeLocale(option.value)"
           >
-            <img class="select-language-content__flag" :src="option.flag" alt="flag" />
-            <span class="select-language-content__country">{{ option.label }}</span>
+            <img
+              class="select-language-content__flag"
+              :src="option.flag"
+              alt="flag"
+            />
+            <span class="select-language-content__country">{{
+              option.label
+            }}</span>
           </div>
         </div>
       </template>
       <template #reference>
         <div class="select-language-trigger">
-          <img class="select-language-trigger__flag" :src="language.flag" alt="flag" />
-          <span class="select-language-trigger__country">{{ language.value }}</span>
+          <img
+            class="select-language-trigger__flag"
+            :src="language.flag"
+            alt="flag"
+          />
+          <span class="select-language-trigger__country">{{
+            language.value
+          }}</span>
         </div>
       </template>
     </popover-component>

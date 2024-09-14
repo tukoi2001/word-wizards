@@ -11,7 +11,9 @@ type Props = {
 
 const props = defineProps<Props>();
 const password = defineModel<string>('password', { required: true });
-const passwordConfirm = defineModel<string>('passwordConfirm', { required: true });
+const passwordConfirm = defineModel<string>('passwordConfirm', {
+  required: true,
+});
 
 const { t } = useI18n();
 
@@ -57,7 +59,9 @@ const onValidatePasswordConfirm = (): void => {
         name="password"
         type="password"
         :label="t('password')"
-        :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
+        :placeholder="
+          t('enter_your_field', { field: t('password').toLowerCase() })
+        "
         :hint="t('password_hint')"
         show-password
         in-form
@@ -68,21 +72,28 @@ const onValidatePasswordConfirm = (): void => {
         name="passwordConfirm"
         type="password"
         :label="t('password_confirm')"
-        :placeholder="t('enter_your_field', { field: t('password_confirm').toLowerCase() })"
+        :placeholder="
+          t('enter_your_field', { field: t('password_confirm').toLowerCase() })
+        "
         show-password
         in-form
         @input="onValidatePasswordConfirm"
       />
     </template>
     <template #action>
-      <button-component type="default" size="default" isFullWidth :onClick="onBackStep">
+      <button-component
+        type="default"
+        size="default"
+        is-full-width
+        :on-click="onBackStep"
+      >
         {{ t('back') }}
       </button-component>
       <button-component
         size="default"
         is-full-width
         :disabled="!isValidPassword || !isValidPasswordConfirm"
-        :onClick="onChangeStep"
+        :on-click="onChangeStep"
       >
         {{ t('continue') }}
       </button-component>

@@ -41,7 +41,9 @@ const rules = computed<FormRules<Auth.ResetPassword>>(() => ({
     {
       required: true,
       whitespace: true,
-      message: t('required_field', { field: t('password_confirm').toLowerCase() }),
+      message: t('required_field', {
+        field: t('password_confirm').toLowerCase(),
+      }),
       trigger: ['blur', 'change'],
     },
     {
@@ -105,10 +107,10 @@ const onGoHome = (): void => {
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent="">
     <auth-layout>
       <template #sidebar>
-        <auth-step :currentStep="currentStep" :steps="steps" />
+        <auth-step :current-step="currentStep" :steps="steps" />
       </template>
       <div name="slide-fade" class="reset-password-container">
         <transition name="slide-fade" class="reset-password-container__content">
@@ -124,7 +126,9 @@ const onGoHome = (): void => {
                 name="newPassword"
                 type="password"
                 :label="t('password')"
-                :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
+                :placeholder="
+                  t('enter_your_field', { field: t('password').toLowerCase() })
+                "
                 :hint="t('password_hint')"
                 show-password
                 in-form
@@ -135,7 +139,11 @@ const onGoHome = (): void => {
                 name="confirmNewPassword"
                 type="password"
                 :label="t('password_confirm')"
-                :placeholder="t('enter_your_field', { field: t('password_confirm').toLowerCase() })"
+                :placeholder="
+                  t('enter_your_field', {
+                    field: t('password_confirm').toLowerCase(),
+                  })
+                "
                 show-password
                 in-form
                 @input="onValidatePasswordConfirm"
@@ -147,7 +155,7 @@ const onGoHome = (): void => {
                 is-full-width
                 :loading="isLoading"
                 :disabled="!isValidPassword || !isValidPasswordConfirm"
-                :onClick="onForgotPassword"
+                :on-click="onForgotPassword"
               >
                 {{ t('apply_your_changes') }}
               </button-component>
@@ -160,7 +168,11 @@ const onGoHome = (): void => {
             icon="check-circle"
           >
             <template #action>
-              <button-component size="default" is-full-width :onClick="onGoHome">
+              <button-component
+                size="default"
+                is-full-width
+                :on-click="onGoHome"
+              >
                 {{ t('continue') }}
               </button-component>
             </template>
@@ -178,7 +190,7 @@ const onGoHome = (): void => {
           </router-link>
         </div>
       </div>
-      <auth-dot-step :currentStep="currentStep" :steps="steps" />
+      <auth-dot-step :current-step="currentStep" :steps="steps" />
     </auth-layout>
   </el-form>
 </template>
