@@ -1,7 +1,7 @@
 import { useAuthStore } from 'stores/auth';
 import { REGEX } from 'config/constants';
 import { RootRouter } from 'enums/app';
-import { showError } from 'utils/toast';
+import { showErrorMessage } from 'utils/message-error';
 
 export default function useSignIn() {
   const { t } = useI18n();
@@ -45,12 +45,12 @@ export default function useSignIn() {
     ],
   }));
 
-  const onSignIn = async (): Promise<void> => {
+  const onSignIn = (): void => {
     isLoading.value = true;
     authStore.signIn(formFields, {
-      onSuccess: () => router.push({ name: RootRouter.HOME_PAGE }),
-      onError: (error) => showError(error.message),
-      onFinish: () => (isLoading.value = false),
+      onSuccess: () => router.replace({ name: RootRouter.HOME_PAGE }),
+      onError: (error: App.ErrorResponse) => showErrorMessage(error),
+      onFinally: () => (isLoading.value = false),
     });
   };
 

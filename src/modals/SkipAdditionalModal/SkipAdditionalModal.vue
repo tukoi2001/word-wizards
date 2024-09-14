@@ -4,7 +4,7 @@ import ButtonComponent from 'components/Button';
 
 type Props = {
   isLoading: boolean;
-  onSignUp: () => Promise<void>;
+  onSignUp: () => void;
 };
 
 defineProps<Props>();

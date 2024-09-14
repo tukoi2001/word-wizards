@@ -8,7 +8,7 @@ const SkipAdditionalModal = defineAsyncComponent(() => import('modals/SkipAdditi
 type Props = {
   formRef: App.Any;
   isLoading: boolean;
-  onSignUp: () => Promise<void>;
+  onSignUp: () => void;
   onBackStep: () => void;
 };
 

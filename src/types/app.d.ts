@@ -1,14 +1,14 @@
 declare namespace App {
   import('enums/app');
 
-  import type { NotificationType } from 'enums/app';
+  import type { NotificationType, StatusCode } from 'enums/app';
 
   type Any = any;
 
   type Callback = {
     onSuccess?: (...args) => void;
     onError?: (...args) => void;
-    onFinish?: (...args) => void;
+    onFinally?: (...args) => void;
   };
 
   type SelectOption = {
@@ -57,4 +57,10 @@ declare namespace App {
   };
 
   type RouteMiddleware = (...args: unknown[]) => boolean;
+
+  type ErrorResponse = {
+    message: string | string[];
+    statusCode?: StatusCode;
+    error?: string;
+  };
 }

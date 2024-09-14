@@ -57,7 +57,7 @@ export default defineConfig(({ mode }) => {
               ['default', 'ElementPlus'],
             ],
           },
-          { 'lodash-es': ['noop', 'get', 'head'] },
+          { 'lodash-es': ['noop', 'get', 'head', 'omit', 'isArray', 'join'] },
           {
             '@tanstack/vue-query': ['useQuery', 'useQueryClient', 'useMutation', 'VueQueryPlugin'],
           },

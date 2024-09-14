@@ -1,8 +1,15 @@
+import { useAuthStore } from 'stores/auth';
+import { showSuccess } from 'utils/toast';
+import { showErrorMessage } from 'utils/message-error';
+import { RootRouter } from 'enums/app';
 import { SignUpStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
 
 export default function useSignUp() {
   const { t } = useI18n();
+  const router = useRouter();
+  const authStore = useAuthStore();
+
   const isLoading = ref<boolean>(false);
   const currentStep = ref<SignUpStep>(SignUpStep.EMAIL);
 
@@ -166,8 +173,16 @@ export default function useSignUp() {
     }
   };
 
-  const onSignUp = async (): Promise<void> => {
-    //TODO: Handle sign up
+  const onSignUp = (): void => {
+    isLoading.value = true;
+    authStore.signUp(formFields, {
+      onSuccess: (response: Auth.SignUpResponse) => {
+        showSuccess(response.message);
+        router.replace({ name: RootRouter.VERIFY_OTP });
+      },
+      onError: (error: App.ErrorResponse) => showErrorMessage(error),
+      onFinally: () => (isLoading.value = false),
+    });
   };
 
   return { currentStep, isLoading, rules, formFields, steps, onChangeStep, onBackStep, onSignUp };

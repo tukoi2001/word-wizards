@@ -1,12 +1,14 @@
 declare namespace Auth {
+  import('enums/app');
   import('enums/auth');
 
+  import type { StatusCode } from 'enums/app';
   import type { AuthRole } from 'enums/auth';
 
   type SignUpForm = {
     email: string;
     password: string;
-    passwordConfirm: string;
+    passwordConfirm?: string;
     firstName: string;
     lastName: string;
     phoneNumber: string;
@@ -44,6 +46,12 @@ declare namespace Auth {
   };
 
   type SignInResponse = Request.TokenResponse & {
+    userInfo: User;
+  };
+
+  type SignUpResponse = {
+    statusCode: StatusCode;
+    message: string;
     userInfo: User;
   };
 }
