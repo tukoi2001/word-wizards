@@ -80,6 +80,7 @@ const onContinue = (): void => {
           :placeholder="
             t('enter_your_field', { field: t('phone_number').toLowerCase() })
           "
+          :disabled="isLoading"
           is-optional
           in-form
           @input="onValidatePhoneNumber"
@@ -101,13 +102,14 @@ const onContinue = (): void => {
           type="default"
           size="default"
           is-full-width
+          :disabled="isLoading"
           :on-click="onBackStep"
         >
           {{ t('back') }}
         </button-component>
         <button-component
           size="default"
-          :disabled="!isValidPhoneNumber || !isValidAddress"
+          :disabled="!isValidPhoneNumber || !isValidAddress || isLoading"
           is-full-width
           :on-click="onContinue"
         >

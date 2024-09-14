@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { resetPassword } from 'api/auth';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
 import { RootRouter } from 'enums/app';
 import { ForgotPasswordStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
@@ -11,7 +13,6 @@ const route = useRoute();
 const router = useRouter();
 
 const currentStep = ref<ForgotPasswordStep>(ForgotPasswordStep.RESET);
-const isLoading = ref<boolean>(false);
 const formRef = ref<FormInstance>();
 const isValidPassword = ref<boolean>(false);
 const isValidPasswordConfirm = ref<boolean>(false);
@@ -75,13 +76,19 @@ onBeforeMount(() => {
   }
 });
 
+const { isPending, mutate: handleResetPassword } = useMutation({
+  mutationKey: ['resetPassword', formFields.newPassword, token.value],
+  mutationFn: () =>
+    resetPassword({ newPassword: formFields.newPassword, token: token.value }),
+  onSuccess: (data: App.BaseResponse) => {
+    showSuccessMessage(data);
+    onSwitchStep(ForgotPasswordStep.DONE);
+  },
+  onError: (error: App.ErrorResponse) => showErrorMessage(error),
+});
+
 const onSwitchStep = (step: ForgotPasswordStep): void => {
   currentStep.value = step;
-};
-
-const onForgotPassword = async (): Promise<void> => {
-  //TODO: Handle reset password
-  onSwitchStep(ForgotPasswordStep.DONE);
 };
 
 const onValidatePassword = (): void => {
@@ -130,6 +137,7 @@ const onGoHome = (): void => {
                   t('enter_your_field', { field: t('password').toLowerCase() })
                 "
                 :hint="t('password_hint')"
+                :disabled="isPending"
                 show-password
                 in-form
                 @input="onValidatePassword"
@@ -144,6 +152,7 @@ const onGoHome = (): void => {
                     field: t('password_confirm').toLowerCase(),
                   })
                 "
+                :disabled="isPending"
                 show-password
                 in-form
                 @input="onValidatePasswordConfirm"
@@ -153,9 +162,9 @@ const onGoHome = (): void => {
               <button-component
                 size="default"
                 is-full-width
-                :loading="isLoading"
+                :loading="isPending"
                 :disabled="!isValidPassword || !isValidPasswordConfirm"
-                :on-click="onForgotPassword"
+                :on-click="handleResetPassword"
               >
                 {{ t('apply_your_changes') }}
               </button-component>

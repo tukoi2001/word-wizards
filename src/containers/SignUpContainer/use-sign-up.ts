@@ -1,6 +1,5 @@
 import { useAuthStore } from 'stores/auth';
-import { showSuccess } from 'utils/toast';
-import { showErrorMessage } from 'utils/message-error';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
 import { RootRouter } from 'enums/app';
 import { SignUpStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
@@ -193,7 +192,7 @@ export default function useSignUp() {
     isLoading.value = true;
     authStore.signUp(formFields, {
       onSuccess: (response: Auth.SignUpResponse) => {
-        showSuccess(response.message);
+        showSuccessMessage(response);
         router.replace({ name: RootRouter.VERIFY_OTP });
       },
       onError: (error: App.ErrorResponse) => showErrorMessage(error),

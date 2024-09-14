@@ -19,7 +19,12 @@ const { t } = useI18n();
     :description="t('skip_filling_data_description')"
   >
     <template #footer="{ onCancelModal }">
-      <button-component type="default" size="default" :on-click="onCancelModal">
+      <button-component
+        type="default"
+        size="default"
+        :disabled="isLoading"
+        :on-click="onCancelModal"
+      >
         {{ t('cancel') }}
       </button-component>
       <button-component

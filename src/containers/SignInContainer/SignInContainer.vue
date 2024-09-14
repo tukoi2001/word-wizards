@@ -52,6 +52,7 @@ const onValidatePassword = (): void => {
                   field: t('email_address').toLowerCase(),
                 })
               "
+              :disabled="isLoading"
               in-form
               @input="onValidateEmail"
             />
@@ -63,6 +64,7 @@ const onValidatePassword = (): void => {
               :placeholder="
                 t('enter_your_field', { field: t('password').toLowerCase() })
               "
+              :disabled="isLoading"
               show-password
               in-form
               @input="onValidatePassword"

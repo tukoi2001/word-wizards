@@ -36,6 +36,7 @@
     "vue/no-v-html": "off",
     "vue/require-default-prop": "off",
     "vue/require-explicit-emits": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "prettier/prettier": [
       "error",
       {

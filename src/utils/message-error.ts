@@ -1,4 +1,4 @@
-import { showError } from 'utils/toast';
+import { showError, showSuccess } from 'utils/toast';
 
 export const showErrorMessage = (error: App.ErrorResponse): void => {
   if (typeof error === 'object') {
@@ -8,4 +8,8 @@ export const showErrorMessage = (error: App.ErrorResponse): void => {
     }
     showError(message);
   }
+};
+
+export const showSuccessMessage = (response: App.BaseResponse): void => {
+  showSuccess(response.message as string);
 };

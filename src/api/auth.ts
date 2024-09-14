@@ -29,3 +29,21 @@ export const resendOtp = (
     method: 'POST',
     data,
   });
+
+export const forgotPassword = (
+  data: Auth.ForgotPasswordForm,
+): Promise<App.BaseResponse> =>
+  useRequest<App.BaseResponse>({
+    url: 'auth/forgot-password',
+    method: 'POST',
+    data,
+  });
+
+export const resetPassword = (
+  data: Auth.ResetPassword,
+): Promise<App.BaseResponse> =>
+  useRequest<App.BaseResponse>({
+    url: 'auth/reset-password',
+    method: 'POST',
+    data,
+  });
