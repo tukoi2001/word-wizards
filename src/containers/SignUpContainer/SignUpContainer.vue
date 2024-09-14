@@ -41,7 +41,7 @@ const formRef = ref<FormInstance>();
           <password-step
             v-else-if="currentStep === SignUpStep.PASSWORD"
             v-model:password="formFields.password"
-            v-model:passwordConfirm="formFields.passwordConfirm"
+            v-model:passwordConfirm="formFields.passwordConfirm!"
             :form-ref="formRef"
             :on-change-step="onChangeStep"
             :on-back-step="onBackStep"

@@ -8,6 +8,7 @@ import {
   revokeUser,
 } from 'utils/auth-cookie';
 import { StatusCode } from 'enums/app';
+import { showError } from 'utils/toast';
 import type {
   AxiosError,
   AxiosInstance,
@@ -108,6 +109,9 @@ const handleResponseError = (error: AxiosError): Promise<AxiosResponse> => {
       break;
     case StatusCode.ACCESS_TOKEN_EXPIRED:
       return handleAccessTokenExpired(originalRequest!);
+    case StatusCode.TOO_MANY_REQUESTS:
+      showError(errorData!);
+      break;
     //   TODO: Handle more case later
     default:
       break;
