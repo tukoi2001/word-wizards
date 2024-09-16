@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 import { AuthStepLayout } from 'components/AuthStep';
 
 const SkipAdditionalModal = defineAsyncComponent(
@@ -125,3 +125,4 @@ const onContinue = (): void => {
     />
   </div>
 </template>
+src/components/Form/Button

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DialogComponent from 'components/Dialog';
-import ButtonComponent from 'components/Button';
+import ButtonComponent from 'components/Form/Button';
 
 type Props = {
   isLoading: boolean;
@@ -37,3 +37,4 @@ const { t } = useI18n();
     </template>
   </dialog-component>
 </template>
+src/components/Form/Button

@@ -14,6 +14,7 @@ const authRoutes = [
     component: SignUpPage,
     meta: {
       title: RootRouter.SIGN_UP,
+      middleware: [guestMiddleWare],
     },
   },
   {
@@ -22,6 +23,7 @@ const authRoutes = [
     component: VerifyOTPPage,
     meta: {
       title: RootRouter.VERIFY_OTP,
+      middleware: [guestMiddleWare],
     },
   },
   {
@@ -39,6 +41,7 @@ const authRoutes = [
     component: ForgotPasswordPage,
     meta: {
       title: RootRouter.FORGOT_PASSWORD,
+      middleware: [guestMiddleWare],
     },
   },
   {
@@ -47,6 +50,7 @@ const authRoutes = [
     component: ResetPasswordPage,
     meta: {
       title: RootRouter.RESET_PASSWORD,
+      middleware: [guestMiddleWare],
     },
   },
 ];

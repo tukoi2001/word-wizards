@@ -263,13 +263,13 @@ canvas {
 
   &.is-drawing {
     cursor:
-      url('assets/pencil.svg') 0 18,
+      url('assets/tools/pencil.svg') 0 18,
       auto;
   }
 
   &.is-erasing {
     cursor:
-      url('assets/eraser.svg') 0 18,
+      url('assets/tools/eraser.svg') 0 18,
       auto;
   }
 }

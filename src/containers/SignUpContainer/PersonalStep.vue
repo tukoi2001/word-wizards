@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 import { AuthStepLayout } from 'components/AuthStep';
 
 type Props = {
@@ -92,3 +92,4 @@ const onValidateLastName = (): void => {
     </template>
   </auth-step-layout>
 </template>
+src/components/Form/Button

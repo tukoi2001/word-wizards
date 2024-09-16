@@ -5,8 +5,8 @@ import { RootRouter } from 'enums/app';
 import { ForgotPasswordStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
 import { AuthStepLayout, AuthStep, AuthDotStep } from 'components/AuthStep';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -247,3 +247,4 @@ const onGoHome = (): void => {
   }
 }
 </style>
+src/components/Form/Button

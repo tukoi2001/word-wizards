@@ -3,7 +3,7 @@ import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
 import DarkModeToggle from 'components/DarkModeToggle';
 import SelectLanguage from 'components/SelectLanguage';
-import ButtonComponent from 'components/Button/Button.vue';
+import ButtonComponent from 'components/Form/Button';
 
 const { t } = useI18n();
 const router = useRouter();
@@ -131,3 +131,4 @@ const onGoHome = (): void => {
   }
 }
 </style>
+src/components/Form/Button/Button.vue

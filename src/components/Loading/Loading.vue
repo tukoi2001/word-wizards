@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .loader-container {
   width: 100vw;
   height: 100vh;
@@ -23,26 +23,28 @@
   width: 50px;
   aspect-ratio: 1;
   display: grid;
-}
-.loader::before,
-.loader::after {
-  content: '';
-  grid-area: 1/1;
-  --c: no-repeat
-    radial-gradient(farthest-side, var(--primary-color) 92%, transparent);
-  background:
-    var(--c) 50% 0,
-    var(--c) 50% 100%,
-    var(--c) 100% 50%,
-    var(--c) 0 50%;
-  background-size: 12px 12px;
-  animation: spin 1s infinite;
-}
-.loader::before {
-  margin: 4px;
-  filter: hue-rotate(45deg);
-  background-size: 8px 8px;
-  animation-timing-function: linear;
+
+  &:before,
+  &:after {
+    content: '';
+    grid-area: 1/1;
+    --c: no-repeat
+      radial-gradient(farthest-side, var(--primary-color) 92%, transparent);
+    background:
+      var(--c) 50% 0,
+      var(--c) 50% 100%,
+      var(--c) 100% 50%,
+      var(--c) 0 50%;
+    background-size: 12px 12px;
+    animation: spin 1s infinite;
+  }
+
+  &:before {
+    margin: 4px;
+    filter: hue-rotate(45deg);
+    background-size: 8px 8px;
+    animation-timing-function: linear;
+  }
 }
 
 @keyframes spin {
