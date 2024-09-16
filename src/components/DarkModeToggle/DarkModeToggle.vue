@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { APP_PROVIDER } from 'config/constants';
-import SwitchComponent from 'components/Switch';
+import SwitchComponent from 'components/Form/Switch';
 
 const { isDarkMode, toggleTheme } = inject(APP_PROVIDER.darkMode)!;
 </script>

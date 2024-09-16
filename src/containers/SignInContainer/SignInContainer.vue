@@ -2,8 +2,8 @@
 import resources from 'config/resources';
 import { RootRouter } from 'enums/app';
 import { AuthStepLayout } from 'components/AuthStep';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 import useSignIn from './use-sign-in';
 
 const { t } = useI18n();
@@ -160,3 +160,4 @@ const onValidatePassword = (): void => {
   }
 }
 </style>
+src/components/Form/Button

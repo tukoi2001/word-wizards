@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import DrawingBoard from './DrawingBoard.vue';
+// import DrawingBoard from './DrawingBoard.vue';
 </script>
 
 <template>
   <main-layout>
-    <drawing-board />
+    <!-- <template #header> Header </template> -->
+    <div>main</div>
   </main-layout>
 </template>

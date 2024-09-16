@@ -2,7 +2,7 @@
 import { verifyOtp, resendOtp } from 'api/auth';
 import { useAuthStore } from 'stores/auth';
 import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
-import otpInput from 'components/OTP';
+import otpInput from 'components/Form/OTP';
 import { AuthStepLayout } from 'components/AuthStep';
 
 type Props = {

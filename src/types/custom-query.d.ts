@@ -6,6 +6,5 @@ declare namespace CustomQuery {
   } from '@tanstack/vue-query';
 
   type TInitialData<T> = MaybeRefDeep<T | InitialDataFunction<T>>;
-  type IInitialValue<T> = TInitialData<T> | undefined;
   type TQueryOptions<T> = QueryObserverOptions<T> & UseQueryOptions<T>;
 }

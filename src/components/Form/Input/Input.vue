@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { v4 as uuidv4 } from 'uuid';
-import FieldCommon from 'components/FieldCommon';
+import FieldCommon from '../FieldCommon';
 
 type Props = {
   type?: 'text' | 'password';

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { RootRouter } from 'enums/app';
-import ButtonComponent from 'components/Button';
+import ButtonComponent from 'components/Form/Button';
 import { AuthStepLayout } from 'components/AuthStep';
 
 const { t } = useI18n();
@@ -37,3 +37,4 @@ const onDone = (): void => {
   color: var(--primary-color);
 }
 </style>
+src/components/Form/Button
