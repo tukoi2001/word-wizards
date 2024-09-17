@@ -61,6 +61,8 @@ export default defineConfig(({ mode }) => {
               'ElScrollbar',
               'ElPopover',
               'ElNotification',
+              'ElTooltip',
+              'ElDrawer',
               ['default', 'ElementPlus'],
             ],
           },

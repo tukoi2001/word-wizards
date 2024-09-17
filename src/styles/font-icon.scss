@@ -27,6 +27,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-homepage:before {
+  content: '\e90e';
+}
+.icon-logout:before {
+  content: '\e90f';
+}
+.icon-menu:before {
+  content: '\e910';
+}
+.icon-user-management:before {
+  content: '\e911';
+}
 .icon-camera:before {
   content: '\e900';
 }

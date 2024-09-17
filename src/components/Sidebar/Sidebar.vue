@@ -1,104 +1,88 @@
 <script lang="ts" setup>
 import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
+import SidebarItem from './SidebarItem.vue';
 
-type Props = {
-  isCollapsedMenu: boolean;
-  onToggleCollapsed: () => void;
-};
+const { t } = useI18n();
 
-defineProps<Props>();
+const menuTopItems = computed<App.SidebarMenu[]>(() => [
+  {
+    icon: 'homepage',
+    title: t('homepage'),
+    to: RootRouter.HOME_PAGE,
+  },
+  {
+    icon: 'user-management',
+    title: t('homepage'),
+    to: RootRouter.NOT_FOUND,
+  },
+]);
+
+const menuBottomItems = computed<App.SidebarMenu[]>(() => [
+  {
+    icon: 'settings',
+    title: t('account_settings'),
+    to: RootRouter.NOT_FOUND,
+  },
+  {
+    icon: 'logout',
+    title: t('log_out'),
+    action: () => {
+      // show modal logout
+    },
+  },
+]);
 </script>
 
 <template>
-  <div
-    :class="[
-      'sidebar-component',
-      { 'sidebar-component--collapsed': isCollapsedMenu },
-    ]"
-  >
-    <div
-      :class="[
-        'sidebar-component__collapse',
-        { 'sidebar-component__collapse--expand': !isCollapsedMenu },
-      ]"
-      @click="onToggleCollapsed"
-    >
-      <font-icon name="camera" :size="16" color="var(--primary-color)" cursor />
-    </div>
+  <div class="sidebar-component">
     <router-link
-      :class="[
-        'sidebar-component-header',
-        { 'sidebar-component-header--collapsed': isCollapsedMenu },
-      ]"
+      class="sidebar-component-header"
       :to="{ name: RootRouter.HOME_PAGE }"
     >
       <img :src="resources.APP_LOGO" alt="app-logo" />
-      <div
-        :class="[
-          'sidebar-component-header__title',
-          { 'sidebar-component-header__title--collapsed': isCollapsedMenu },
-        ]"
-      >
-        Word Wizards
-      </div>
     </router-link>
+    <div class="sidebar-component-main">
+      <div class="sidebar-component-main__top">
+        <sidebar-item :menu-items="menuTopItems" />
+      </div>
+      <div class="sidebar-component-main__bottom">
+        <sidebar-item :menu-items="menuBottomItems" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @media (min-width: 1024px) {
   .sidebar-component {
-    @include flex-box(flex-start);
+    @include flex-box(flex-start, center);
     flex-direction: column;
     position: relative;
     height: 100%;
     transition: all 0.3s ease-in-out;
-
-    &--collapsed {
-      align-items: center;
-    }
-
-    &__collapse {
-      @include flex-box;
-      position: absolute;
-      right: -38px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
-      background: $primary-light;
-      border-radius: 50%;
-      border: 1px solid $primary-active;
-      transition: all 0.3s ease-in-out;
-      z-index: 2;
-
-      &--expand {
-        transform: rotate(-180deg);
-      }
-    }
   }
 
   .sidebar-component-header {
-    @include flex-box(flex-start);
-    gap: 12px;
+    padding: 26px 24px 25px 24px;
+    border-bottom: 1px solid $primary-light;
     text-decoration: none;
+  }
 
-    &--collapsed {
-      gap: 0;
+  .sidebar-component-main {
+    @include flex-box;
+    flex-direction: column;
+    height: 100%;
+
+    &__top {
+      flex: 1 1 auto;
+      padding: 24px 20px;
     }
 
-    &__title {
-      @include style-text(18px, 600, 27px);
-      width: auto;
-      color: var(--text-primary-color);
-      white-space: pre;
-      transition: all 0.3s ease-in-out;
-
-      &--collapsed {
-        width: 0;
-        opacity: 0;
-      }
+    &__bottom {
+      flex: 0 0 auto;
+      padding: 24px 30px;
+      border-top: 1px solid $primary-light;
     }
   }
 }

@@ -3,36 +3,16 @@ import HeaderComponent from 'components/Header';
 import SidebarComponent from 'components/Sidebar';
 
 const slots = useSlots();
-
-const isCollapsedMenu = ref<boolean>(false);
-
-const onToggleCollapsed = (): void => {
-  isCollapsedMenu.value = !isCollapsedMenu.value;
-};
 </script>
 
 <template>
   <div class="main-layout">
-    <aside
-      :class="[
-        'main-layout-sidebar',
-        { 'main-layout-sidebar--collapsed': isCollapsedMenu },
-      ]"
-    >
+    <aside class="main-layout-sidebar">
       <slot v-if="slots.sidebar" name="sidebar"> </slot>
-      <sidebar-component
-        v-else
-        :is-collapsed-menu="isCollapsedMenu"
-        :on-toggle-collapsed="onToggleCollapsed"
-      />
+      <sidebar-component v-else />
     </aside>
     <div class="main-layout-main">
-      <header
-        :class="[
-          'main-layout-main-header',
-          { 'main-layout-main-header--collapsed': isCollapsedMenu },
-        ]"
-      >
+      <header class="main-layout-main-header">
         <slot v-if="slots.header" name="header"></slot>
         <header-component v-else />
       </header>
@@ -81,26 +61,14 @@ const onToggleCollapsed = (): void => {
 @media (min-width: 1024px) {
   .main-layout-sidebar {
     display: block;
-    flex: 0 1 auto;
-    width: 200px;
-    padding: 24px;
+    flex: 0 1 76px;
     background: var(--secondary-color);
     border-right: 1px solid $primary-light;
-    transition: all 0.3s ease-in-out;
-
-    &--collapsed {
-      width: 40px;
-    }
   }
 
   .main-layout-main-header {
-    left: 248px;
+    left: 80px;
     border-left: 1px solid $primary-light;
-    transition: all 0.3s ease-in-out;
-
-    &--collapsed {
-      left: 88px;
-    }
   }
 }
 </style>
