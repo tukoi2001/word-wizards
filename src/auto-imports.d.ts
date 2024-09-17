@@ -9,6 +9,7 @@ declare global {
   const EffectScope: (typeof import('vue'))['EffectScope'];
   const ElButton: (typeof import('element-plus'))['ElButton'];
   const ElDialog: (typeof import('element-plus'))['ElDialog'];
+  const ElDrawer: (typeof import('element-plus'))['ElDrawer'];
   const ElForm: (typeof import('element-plus'))['ElForm'];
   const ElFormItem: (typeof import('element-plus'))['ElFormItem'];
   const ElInput: (typeof import('element-plus'))['ElInput'];
@@ -18,6 +19,7 @@ declare global {
   const ElScrollbar: (typeof import('element-plus'))['ElScrollbar'];
   const ElSelect: (typeof import('element-plus'))['ElSelect'];
   const ElSwitch: (typeof import('element-plus'))['ElSwitch'];
+  const ElTooltip: (typeof import('element-plus'))['ElTooltip'];
   const ElementPlus: (typeof import('element-plus'))['default'];
   const VueQueryPlugin: (typeof import('@tanstack/vue-query'))['VueQueryPlugin'];
   const computed: (typeof import('vue'))['computed'];

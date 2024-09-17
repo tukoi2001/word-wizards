@@ -66,4 +66,11 @@ declare namespace App {
     message: string | string[];
     statusCode?: StatusCode;
   };
+
+  type SidebarMenu = {
+    icon: string;
+    title: string;
+    to?: string;
+    action?: () => void | Promise<void>;
+  };
 }
