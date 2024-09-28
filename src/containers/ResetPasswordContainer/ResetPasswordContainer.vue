@@ -1,24 +1,18 @@
 <script lang="ts" setup>
-import { reactive, ref, computed, onBeforeMount } from 'vue';
-import { ElForm } from 'element-plus';
-import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
+import { resetPassword } from 'api/auth';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
 import { RootRouter } from 'enums/app';
-import { noop } from 'lodash-es';
-
 import { ForgotPasswordStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
 import { AuthStepLayout, AuthStep, AuthDotStep } from 'components/AuthStep';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
-import type { FormInstance, FormRules } from 'element-plus';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 
 const currentStep = ref<ForgotPasswordStep>(ForgotPasswordStep.RESET);
-const isLoading = ref<boolean>(false);
 const formRef = ref<FormInstance>();
 const isValidPassword = ref<boolean>(false);
 const isValidPasswordConfirm = ref<boolean>(false);
@@ -48,7 +42,9 @@ const rules = computed<FormRules<Auth.ResetPassword>>(() => ({
     {
       required: true,
       whitespace: true,
-      message: t('required_field', { field: t('password_confirm').toLowerCase() }),
+      message: t('required_field', {
+        field: t('password_confirm').toLowerCase(),
+      }),
       trigger: ['blur', 'change'],
     },
     {
@@ -80,13 +76,19 @@ onBeforeMount(() => {
   }
 });
 
+const { isPending, mutate: handleResetPassword } = useMutation({
+  mutationKey: ['resetPassword', formFields.newPassword, token.value],
+  mutationFn: () =>
+    resetPassword({ newPassword: formFields.newPassword, token: token.value }),
+  onSuccess: (data: App.BaseResponse) => {
+    showSuccessMessage(data);
+    onSwitchStep(ForgotPasswordStep.DONE);
+  },
+  onError: (error: App.ErrorResponse) => showErrorMessage(error),
+});
+
 const onSwitchStep = (step: ForgotPasswordStep): void => {
   currentStep.value = step;
-};
-
-const onForgotPassword = async (): Promise<void> => {
-  //TODO: Handle reset password
-  onSwitchStep(ForgotPasswordStep.DONE);
 };
 
 const onValidatePassword = (): void => {
@@ -112,10 +114,10 @@ const onGoHome = (): void => {
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent="">
     <auth-layout>
       <template #sidebar>
-        <auth-step :currentStep="currentStep" :steps="steps" />
+        <auth-step :current-step="currentStep" :steps="steps" />
       </template>
       <div name="slide-fade" class="reset-password-container">
         <transition name="slide-fade" class="reset-password-container__content">
@@ -131,8 +133,11 @@ const onGoHome = (): void => {
                 name="newPassword"
                 type="password"
                 :label="t('password')"
-                :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
+                :placeholder="
+                  t('enter_your_field', { field: t('password').toLowerCase() })
+                "
                 :hint="t('password_hint')"
+                :disabled="isPending"
                 show-password
                 in-form
                 @input="onValidatePassword"
@@ -142,7 +147,12 @@ const onGoHome = (): void => {
                 name="confirmNewPassword"
                 type="password"
                 :label="t('password_confirm')"
-                :placeholder="t('enter_your_field', { field: t('password_confirm').toLowerCase() })"
+                :placeholder="
+                  t('enter_your_field', {
+                    field: t('password_confirm').toLowerCase(),
+                  })
+                "
+                :disabled="isPending"
                 show-password
                 in-form
                 @input="onValidatePasswordConfirm"
@@ -152,9 +162,9 @@ const onGoHome = (): void => {
               <button-component
                 size="default"
                 is-full-width
-                :loading="isLoading"
+                :loading="isPending"
                 :disabled="!isValidPassword || !isValidPasswordConfirm"
-                :onClick="onForgotPassword"
+                :on-click="handleResetPassword"
               >
                 {{ t('apply_your_changes') }}
               </button-component>
@@ -167,7 +177,11 @@ const onGoHome = (): void => {
             icon="check-circle"
           >
             <template #action>
-              <button-component size="default" is-full-width :onClick="onGoHome">
+              <button-component
+                size="default"
+                is-full-width
+                :on-click="onGoHome"
+              >
                 {{ t('continue') }}
               </button-component>
             </template>
@@ -185,7 +199,7 @@ const onGoHome = (): void => {
           </router-link>
         </div>
       </div>
-      <auth-dot-step :currentStep="currentStep" :steps="steps" />
+      <auth-dot-step :current-step="currentStep" :steps="steps" />
     </auth-layout>
   </el-form>
 </template>
@@ -233,3 +247,4 @@ const onGoHome = (): void => {
   }
 }
 </style>
+src/components/Form/Button

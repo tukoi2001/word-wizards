@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 import { RootRouter } from 'enums/app';
-import ButtonComponent from 'components/Button';
+import ButtonComponent from 'components/Form/Button';
 import { AuthStepLayout } from 'components/AuthStep';
 
 const { t } = useI18n();
@@ -20,10 +18,12 @@ const onDone = (): void => {
     icon="verified-user"
   >
     <template #content>
-      <div class="verify-success-content">{{ t('welcome_to_word_wizards_description') }}</div>
+      <div class="verify-success-content">
+        {{ t('welcome_to_word_wizards_description') }}
+      </div>
     </template>
     <template #action>
-      <button-component size="default" isFullWidth :onClick="onDone">
+      <button-component size="default" is-full-width :on-click="onDone">
         {{ t('welcome_to_word_wizards') }}
       </button-component>
     </template>
@@ -37,3 +37,4 @@ const onDone = (): void => {
   color: var(--primary-color);
 }
 </style>
+src/components/Form/Button

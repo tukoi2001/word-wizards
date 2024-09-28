@@ -14,7 +14,10 @@ defineProps<Props>();
       :key="index"
       :class="[
         'auth-step-dot-item',
-        { 'is-disabled': currentStep < index, 'is-active': currentStep === index },
+        {
+          'is-disabled': currentStep < index,
+          'is-active': currentStep === index,
+        },
       ]"
       @click="step.action"
     ></div>

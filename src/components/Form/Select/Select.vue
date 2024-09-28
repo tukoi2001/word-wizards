@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { useAttrs } from 'vue';
-import { ElSelect, ElOption, useId } from 'element-plus';
-import { noop } from 'lodash-es';
-import FieldCommon from 'components/FieldCommon';
+import { v4 as uuidv4 } from 'uuid';
+
+import FieldCommon from '../FieldCommon';
 
 type Props = {
   options: App.SelectOption[];
@@ -10,7 +9,9 @@ type Props = {
   label?: string;
   inForm?: boolean;
   isOptional: boolean;
-  onChange?: (value: App.SelectOption['value'] | App.SelectOption['value'][]) => void;
+  onChange?: (
+    value: App.SelectOption['value'] | App.SelectOption['value'][],
+  ) => void;
 };
 
 withDefaults(defineProps<Props>(), {
@@ -21,12 +22,23 @@ withDefaults(defineProps<Props>(), {
   onChange: noop,
 });
 const attrs = useAttrs();
-const id = useId();
+const id = uuidv4();
 </script>
 
 <template>
-  <field-common :id="id" :in-form="inForm" :name="name" :label="label" :is-optional="isOptional">
-    <el-select v-bind="attrs" :class="['select-component']" fit-input-width @change="onChange">
+  <field-common
+    :id="id"
+    :in-form="inForm"
+    :name="name"
+    :label="label"
+    :is-optional="isOptional"
+  >
+    <el-select
+      v-bind="attrs"
+      :class="['select-component']"
+      fit-input-width
+      @change="onChange"
+    >
       <el-option
         v-for="option in options"
         :key="String(option.value)"

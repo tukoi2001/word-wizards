@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-
 type Props = {
   id: string;
   label?: string;
@@ -16,7 +14,9 @@ const { t } = useI18n();
   <div class="field-common">
     <label v-if="!!label" class="field-common__label" :for="id">
       {{ label }}
-      <span v-if="isOptional" class="field-common__label--optional">({{ t('optional') }})</span>
+      <span v-if="isOptional" class="field-common__label--optional"
+        >({{ t('optional') }})</span
+      >
     </label>
     <slot></slot>
   </div>

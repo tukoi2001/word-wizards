@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { noop } from 'lodash-es';
-import { useI18n } from 'vue-i18n';
+import { useAuthStore } from 'stores/auth';
 import { VerifyOTPStep } from 'enums/auth';
 import { AuthStep, AuthDotStep } from 'components/AuthStep';
 import VerifyOtpStep from './VerifyOTPStep.vue';
 import VerifiedSuccess from './VerifiedSuccess.vue';
 
 const { t } = useI18n();
+const authStore = useAuthStore();
 
 const currentStep = ref<VerifyOTPStep>(VerifyOTPStep.VERIFY);
 
@@ -26,6 +25,12 @@ const steps = computed<App.AuthStep[]>(() => [
   },
 ]);
 
+onBeforeMount(() => {
+  if (authStore.currentUser?.isActive) {
+    currentStep.value = VerifyOTPStep.DONE;
+  }
+});
+
 const onVerifySuccess = (): void => {
   currentStep.value = VerifyOTPStep.DONE;
 };
@@ -34,7 +39,7 @@ const onVerifySuccess = (): void => {
 <template>
   <auth-layout>
     <template #sidebar>
-      <auth-step :currentStep="currentStep" :steps="steps" />
+      <auth-step :current-step="currentStep" :steps="steps" />
     </template>
     <div class="verify-otp-container">
       <transition name="slide-fade" class="verify-otp-container__content">
@@ -45,7 +50,7 @@ const onVerifySuccess = (): void => {
         <verified-success v-else />
       </transition>
     </div>
-    <auth-dot-step :currentStep="currentStep" :steps="steps" />
+    <auth-dot-step :current-step="currentStep" :steps="steps" />
   </auth-layout>
 </template>
 

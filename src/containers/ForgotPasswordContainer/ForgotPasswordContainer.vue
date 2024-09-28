@@ -1,22 +1,16 @@
 <script lang="ts" setup>
-import { reactive, ref, computed } from 'vue';
-import { ElForm } from 'element-plus';
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
-import { noop } from 'lodash-es';
-
+import { forgotPassword } from 'api/auth';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
 import { RootRouter } from 'enums/app';
 import { ForgotPasswordStep } from 'enums/auth';
 import { AuthStepLayout, AuthStep, AuthDotStep } from 'components/AuthStep';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
-import type { FormInstance, FormRules } from 'element-plus';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 
 const { t } = useI18n();
 const router = useRouter();
 
 const currentStep = ref<ForgotPasswordStep>(ForgotPasswordStep.RESET);
-const isLoading = ref<boolean>(false);
 const formRef = ref<FormInstance>();
 const isValidEmail = ref<boolean>(false);
 
@@ -55,13 +49,18 @@ const steps = computed<App.AuthStep[]>(() => [
   },
 ]);
 
+const { isPending, mutate: handleForgotPassword } = useMutation({
+  mutationKey: ['forgotPassword', formFields],
+  mutationFn: () => forgotPassword(formFields),
+  onSuccess: (data: App.BaseResponse) => {
+    showSuccessMessage(data);
+    onSwitchStep(ForgotPasswordStep.DONE);
+  },
+  onError: (error: App.ErrorResponse) => showErrorMessage(error),
+});
+
 const onSwitchStep = (step: ForgotPasswordStep): void => {
   currentStep.value = step;
-};
-
-const onForgotPassword = async (): Promise<void> => {
-  //TODO: Handle forgot password
-  onSwitchStep(ForgotPasswordStep.DONE);
 };
 
 const onValidateEmail = (): void => {
@@ -78,13 +77,16 @@ const onGoHome = (): void => {
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent="">
     <auth-layout>
       <template #sidebar>
-        <auth-step :currentStep="currentStep" :steps="steps" />
+        <auth-step :current-step="currentStep" :steps="steps" />
       </template>
       <div name="slide-fade" class="forgot-password-container">
-        <transition name="slide-fade" class="forgot-password-container__content">
+        <transition
+          name="slide-fade"
+          class="forgot-password-container__content"
+        >
           <auth-step-layout
             v-if="currentStep === ForgotPasswordStep.RESET"
             :title="t('forgot_password')"
@@ -96,7 +98,12 @@ const onGoHome = (): void => {
                 v-model="formFields.email"
                 name="email"
                 :label="t('email_address')"
-                :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
+                :placeholder="
+                  t('enter_your_field', {
+                    field: t('email_address').toLowerCase(),
+                  })
+                "
+                :disabled="isPending"
                 in-form
                 @input="onValidateEmail"
               />
@@ -105,9 +112,9 @@ const onGoHome = (): void => {
               <button-component
                 size="default"
                 is-full-width
-                :loading="isLoading"
+                :loading="isPending"
                 :disabled="!isValidEmail"
-                :onClick="onForgotPassword"
+                :on-click="handleForgotPassword"
               >
                 {{ t('reset_password') }}
               </button-component>
@@ -120,7 +127,11 @@ const onGoHome = (): void => {
             icon="check-circle"
           >
             <template #action>
-              <button-component size="default" is-full-width :onClick="onGoHome">
+              <button-component
+                size="default"
+                is-full-width
+                :on-click="onGoHome"
+              >
                 {{ t('continue') }}
               </button-component>
             </template>
@@ -138,7 +149,7 @@ const onGoHome = (): void => {
           </router-link>
         </div>
       </div>
-      <auth-dot-step :currentStep="currentStep" :steps="steps" />
+      <auth-dot-step :current-step="currentStep" :steps="steps" />
     </auth-layout>
   </el-form>
 </template>

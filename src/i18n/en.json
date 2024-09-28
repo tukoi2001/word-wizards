@@ -62,5 +62,8 @@
   "password_reset_successfully_description": "Your password has been reset successfully! Click below to log in magically.",
   "create_a_new_password": "Create a new password",
   "create_a_new_password_description": "Enter a password that hasn't been used before.",
-  "apply_your_changes": "Apply your changes"
+  "apply_your_changes": "Apply your changes",
+  "log_out": "Log out",
+  "homepage": "Homepage",
+  "account_settings": "Account settings"
 }

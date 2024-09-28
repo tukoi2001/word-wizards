@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { useAttrs } from 'vue';
-import { ElInput, useId } from 'element-plus';
-import { noop } from 'lodash-es';
-import FieldCommon from 'components/FieldCommon';
+import { v4 as uuidv4 } from 'uuid';
+import FieldCommon from '../FieldCommon';
 
 type Props = {
   type?: 'text' | 'password';
@@ -25,11 +23,17 @@ withDefaults(defineProps<Props>(), {
   onChange: noop,
 });
 const attrs = useAttrs();
-const id = useId();
+const id = uuidv4();
 </script>
 
 <template>
-  <field-common :id="id" :inForm="inForm" :name="name" :label="label" :isOptional="isOptional">
+  <field-common
+    :id="id"
+    :in-form="inForm"
+    :name="name"
+    :label="label"
+    :is-optional="isOptional"
+  >
     <el-input
       v-bind="attrs"
       :type="type"

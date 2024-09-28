@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useAttrs, useSlots, inject } from 'vue';
 import { APP_PROVIDER } from 'config/constants';
 
 type Props = {
@@ -25,12 +24,12 @@ const { isDarkMode } = inject(APP_PROVIDER.darkMode)!;
     :content="content"
     :title="title"
     :effect="isDarkMode ? 'light' : 'dark'"
-    :popperClass="['popover-component', popperClass]"
+    :popper-class="['popover-component', popperClass]"
   >
     <template v-if="!content && slots.default">
       <slot></slot>
     </template>
-    <template #reference v-if="!title && slots.reference">
+    <template v-if="!title && slots.reference" #reference>
       <slot name="reference"></slot>
     </template>
   </el-popover>

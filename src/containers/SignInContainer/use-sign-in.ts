@@ -1,10 +1,13 @@
-import { computed, ref, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useAuthStore } from 'stores/auth';
 import { REGEX } from 'config/constants';
-import type { FormRules } from 'element-plus';
+import { RootRouter } from 'enums/app';
+import { showErrorMessage } from 'utils/message-error';
 
 export default function useSignIn() {
   const { t } = useI18n();
+  const router = useRouter();
+  const authStore = useAuthStore();
+
   const isLoading = ref<boolean>(false);
 
   const formFields = reactive<Auth.SignInForm>({
@@ -17,7 +20,9 @@ export default function useSignIn() {
       {
         required: true,
         whitespace: true,
-        message: t('required_field', { field: t('email_address').toLowerCase() }),
+        message: t('required_field', {
+          field: t('email_address').toLowerCase(),
+        }),
         trigger: ['blur', 'change'],
       },
       {
@@ -42,8 +47,13 @@ export default function useSignIn() {
     ],
   }));
 
-  const onSignIn = async (): Promise<void> => {
-    //TODO: Handle sign in
+  const onSignIn = (): void => {
+    isLoading.value = true;
+    authStore.signIn(formFields, {
+      onSuccess: () => router.replace({ name: RootRouter.HOME_PAGE }),
+      onError: (error: App.ErrorResponse) => showErrorMessage(error),
+      onFinally: () => (isLoading.value = false),
+    });
   };
 
   return { isLoading, rules, formFields, onSignIn };

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useSlots } from 'vue';
-import { ElScrollbar } from 'element-plus';
 import { RootRouter } from 'enums/app';
 import resources from 'config/resources';
 import DarkModeToggle from 'components/DarkModeToggle';
@@ -12,7 +10,10 @@ const slots = useSlots();
 <template>
   <div class="auth-layout">
     <aside v-if="slots.sidebar" class="auth-layout-sidebar">
-      <router-link class="auth-layout-sidebar__header" :to="{ name: RootRouter.HOME_PAGE }">
+      <router-link
+        class="auth-layout-sidebar__header"
+        :to="{ name: RootRouter.HOME_PAGE }"
+      >
         <img :src="resources.APP_LOGO" alt="app-logo" />
         <div class="auth-layout-sidebar__title">Word Wizards</div>
       </router-link>
@@ -22,9 +23,18 @@ const slots = useSlots();
         </div>
       </el-scrollbar>
       <div class="auth-layout-sidebar__footer">
-        <div class="auth-layout-sidebar__copy-right">&copy; Tu Xuan Front End Dev 2024</div>
-        <a class="auth-layout-sidebar__contact" href="mailto:tutx.it610@gmail.com">
-          <font-icon name="email" :size="14" color="var(--text-tertiary-color)" />
+        <div class="auth-layout-sidebar__copy-right">
+          &copy; Tu Xuan Front End Dev 2024
+        </div>
+        <a
+          class="auth-layout-sidebar__contact"
+          href="mailto:tutx.it610@gmail.com"
+        >
+          <font-icon
+            name="email"
+            :size="14"
+            color="var(--text-tertiary-color)"
+          />
           tutx.it610@gmail.com
         </a>
       </div>

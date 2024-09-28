@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { ref, useAttrs } from 'vue';
 import VOtpInput from 'vue3-otp-input';
-import { noop } from 'lodash-es';
 
 type Props = {
   numInputs?: number;
@@ -33,12 +31,12 @@ defineExpose({
   <v-otp-input
     v-bind="attrs"
     ref="otpInput"
-    :numInputs="numInputs"
-    :inputType="inputType"
-    inputClasses="otp-input"
-    :shouldAutoFocus="shouldAutoFocus"
-    :shouldFocusOrder="shouldFocusOrder"
-    :isDisabled="false"
+    :num-inputs="numInputs"
+    :input-type="inputType"
+    input-classes="otp-input"
+    :should-auto-focus="shouldAutoFocus"
+    :should-focus-order="shouldFocusOrder"
+    :is-disabled="false"
     @on-change="onChange"
     @on-complete="onComplete"
   />

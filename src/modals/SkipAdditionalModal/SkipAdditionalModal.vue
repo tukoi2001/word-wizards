@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useAttrs } from 'vue';
-import { useI18n } from 'vue-i18n';
 import DialogComponent from 'components/Dialog';
-import ButtonComponent from 'components/Button';
+import ButtonComponent from 'components/Form/Button';
 
 type Props = {
   isLoading: boolean;
-  onSignUp: () => Promise<void>;
+  onSignUp: () => void;
 };
 
 defineProps<Props>();
@@ -21,12 +19,22 @@ const { t } = useI18n();
     :description="t('skip_filling_data_description')"
   >
     <template #footer="{ onCancelModal }">
-      <button-component type="default" size="default" :on-click="onCancelModal">
+      <button-component
+        type="default"
+        size="default"
+        :disabled="isLoading"
+        :on-click="onCancelModal"
+      >
         {{ t('cancel') }}
       </button-component>
-      <button-component size="default" :loading="isLoading" :on-click="onSignUp">
+      <button-component
+        size="default"
+        :loading="isLoading"
+        :on-click="onSignUp"
+      >
         {{ t('get_started') }}
       </button-component>
     </template>
   </dialog-component>
 </template>
+src/components/Form/Button

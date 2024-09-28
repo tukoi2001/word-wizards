@@ -16,3 +16,17 @@ export enum Theme {
   DARK = 'Dark',
   LIGHT = 'Light',
 }
+
+export enum StatusCode {
+  CREATED = 201,
+  UNAUTHORIZED = 401,
+  ACCESS_TOKEN_EXPIRED = 440,
+  TOO_MANY_REQUESTS = 429,
+}
+
+export enum NotificationType {
+  SUCCESS = 'success',
+  ERROR = 'error',
+  WARNING = 'warning',
+  INFO = 'info',
+}

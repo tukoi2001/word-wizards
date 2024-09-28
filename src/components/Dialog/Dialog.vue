@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useAttrs, useSlots } from 'vue';
-import { ElDialog } from 'element-plus';
-
 type Props = {
   width?: number;
   title?: string;
@@ -31,24 +28,29 @@ const onCancelModal = (): void => {
     v-bind="attrs"
     class="dialog-component"
     :width="width"
-    :showClose="showClose"
-    :closeOnClickModal="closeOnClickModal"
-    alignCenter
-    destroyOnClose
-    appendToBody
+    :show-close="showClose"
+    :close-on-click-modal="closeOnClickModal"
+    align-center
+    destroy-on-close
+    append-to-body
   >
     <template #header>
-      <div v-if="!!title && !slots.header" class="dialog-component__title">{{ title }}</div>
+      <div v-if="!!title && !slots.header" class="dialog-component__title">
+        {{ title }}
+      </div>
       <slot v-else name="header"></slot>
     </template>
     <template #default>
-      <div v-if="!!description && !slots.default" class="dialog-component__description">
+      <div
+        v-if="!!description && !slots.default"
+        class="dialog-component__description"
+      >
         {{ description }}
       </div>
       <slot v-else></slot>
     </template>
     <template v-if="slots.footer" #footer>
-      <slot name="footer" :onCancelModal="onCancelModal"></slot>
+      <slot name="footer" :on-cancel-modal="onCancelModal"></slot>
     </template>
   </el-dialog>
 </template>

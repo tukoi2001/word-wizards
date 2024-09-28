@@ -1,5 +1,3 @@
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-
 export default function useInteractionType() {
   const isTouchEvent = ref<boolean>(false);
 

@@ -1,14 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { ElForm } from 'element-plus';
-import { useI18n } from 'vue-i18n';
 import resources from 'config/resources';
 import { RootRouter } from 'enums/app';
 import { AuthStepLayout } from 'components/AuthStep';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 import useSignIn from './use-sign-in';
-import type { FormInstance } from 'element-plus';
 
 const { t } = useI18n();
 
@@ -36,7 +32,7 @@ const onValidatePassword = (): void => {
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent.native="">
+  <el-form ref="formRef" :model="formFields" :rules="rules" @submit.prevent="">
     <auth-layout>
       <div class="sign-in-container">
         <div class="sign-in-container-header">
@@ -51,7 +47,12 @@ const onValidatePassword = (): void => {
               v-model="formFields.email"
               name="email"
               :label="t('email_address')"
-              :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
+              :placeholder="
+                t('enter_your_field', {
+                  field: t('email_address').toLowerCase(),
+                })
+              "
+              :disabled="isLoading"
               in-form
               @input="onValidateEmail"
             />
@@ -60,30 +61,41 @@ const onValidatePassword = (): void => {
               name="password"
               type="password"
               :label="t('password')"
-              :placeholder="t('enter_your_field', { field: t('password').toLowerCase() })"
+              :placeholder="
+                t('enter_your_field', { field: t('password').toLowerCase() })
+              "
+              :disabled="isLoading"
               show-password
               in-form
               @input="onValidatePassword"
             />
-            <router-link class="sign-in-container__action" :to="{ name: RootRouter.SIGN_IN }">
+            <router-link
+              class="sign-in-container__action"
+              :to="{ name: RootRouter.FORGOT_PASSWORD }"
+            >
               {{ t('forgot_password') }}
             </router-link>
           </template>
           <template #action>
             <button-component
               size="default"
-              isFullWidth
+              is-full-width
               :loading="isLoading"
               :disabled="!isValidPassword || !isValidEmail"
-              :onClick="onSignIn"
+              :on-click="onSignIn"
             >
               {{ t('sign_in') }}
             </button-component>
           </template>
         </auth-step-layout>
         <div class="sign-in-container-footer">
-          <span class="sign-in-container-footer__title">{{ t('do_not_have_an_account') }}</span>
-          <router-link class="sign-in-container-footer__link" :to="{ name: RootRouter.SIGN_UP }">
+          <span class="sign-in-container-footer__title">{{
+            t('do_not_have_an_account')
+          }}</span>
+          <router-link
+            class="sign-in-container-footer__link"
+            :to="{ name: RootRouter.SIGN_UP }"
+          >
             {{ t('sign_up') }}
           </router-link>
         </div>
@@ -148,3 +160,4 @@ const onValidatePassword = (): void => {
   }
 }
 </style>
+src/components/Form/Button

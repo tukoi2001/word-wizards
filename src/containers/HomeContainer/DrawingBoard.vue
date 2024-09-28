@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import useInteractionType from 'hooks/use-interaction-type';
 import { KeyCode } from 'enums/app';
 
@@ -9,7 +8,15 @@ const isErasing = ref<boolean>(false);
 const canvas = ref<HTMLCanvasElement | null>(null);
 const ctx = ref<CanvasRenderingContext2D | null>(null);
 const container = ref<HTMLDivElement | null>(null);
-const colors = ['#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+const colors = [
+  '#000000',
+  '#FF0000',
+  '#00FF00',
+  '#0000FF',
+  '#FFFF00',
+  '#FF00FF',
+  '#00FFFF',
+];
 const undoStack = ref<ImageData[]>([]);
 const redoStack = ref<ImageData[]>([]);
 const savedImage = ref<ImageData | null>(null);
@@ -38,7 +45,12 @@ onBeforeUnmount(() => {
 
 const handleResize = (): void => {
   if (canvas.value && ctx.value) {
-    savedImage.value = ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height);
+    savedImage.value = ctx.value.getImageData(
+      0,
+      0,
+      canvas.value.width,
+      canvas.value.height,
+    );
     resizeCanvas();
     if (savedImage.value) {
       ctx.value.putImageData(savedImage.value, 0, 0);
@@ -57,14 +69,17 @@ const resizeCanvas = (): void => {
 
 const saveState = (): void => {
   if (ctx.value && canvas.value) {
-    undoStack.value.push(ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height));
+    undoStack.value.push(
+      ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height),
+    );
     redoStack.value = [];
   }
 };
 
 const handleKeyDown = (event: KeyboardEvent): void => {
   event.preventDefault();
-  const isMacDevice = navigator.userAgent?.toUpperCase().includes('MAC') ?? false;
+  const isMacDevice =
+    navigator.userAgent?.toUpperCase().includes('MAC') ?? false;
   const isUndoStep =
     (isMacDevice && event.metaKey && event.code === KeyCode.KEYZ) ||
     (!isMacDevice && event.ctrlKey && event.key === KeyCode.KEYZ);
@@ -92,14 +107,22 @@ const startDrawing = (event: MouseEvent | TouchEvent): void => {
 
 const draw = (event: MouseEvent | TouchEvent) => {
   if (!isDrawing.value) return;
-  const clientX = event instanceof TouchEvent ? event.touches[0].clientX : event.clientX;
-  const clientY = event instanceof TouchEvent ? event.touches[0].clientY : event.clientY;
+  const clientX =
+    event instanceof TouchEvent ? event.touches[0].clientX : event.clientX;
+  const clientY =
+    event instanceof TouchEvent ? event.touches[0].clientY : event.clientY;
   ctx.value!.lineWidth = lineWidth.value;
   ctx.value!.lineCap = lineCap.value;
-  ctx.value!.lineTo(clientX - canvas.value!.offsetLeft, clientY - canvas.value!.offsetTop);
+  ctx.value!.lineTo(
+    clientX - canvas.value!.offsetLeft,
+    clientY - canvas.value!.offsetTop,
+  );
   ctx.value!.stroke();
   ctx.value!.beginPath();
-  ctx.value!.moveTo(clientX - canvas.value!.offsetLeft, clientY - canvas.value!.offsetTop);
+  ctx.value!.moveTo(
+    clientX - canvas.value!.offsetLeft,
+    clientY - canvas.value!.offsetTop,
+  );
 };
 
 const stopDrawing = (): void => {
@@ -119,7 +142,9 @@ const clearCanvas = (): void => {
 
 const undo = (): void => {
   if (undoStack.value.length > 0 && ctx.value && canvas.value) {
-    redoStack.value.push(ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height));
+    redoStack.value.push(
+      ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height),
+    );
     const lastState = undoStack.value.pop();
     if (lastState) {
       ctx.value.putImageData(lastState, 0, 0);
@@ -129,7 +154,9 @@ const undo = (): void => {
 
 const redo = (): void => {
   if (redoStack.value.length > 0 && ctx.value && canvas.value) {
-    undoStack.value.push(ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height));
+    undoStack.value.push(
+      ctx.value.getImageData(0, 0, canvas.value.width, canvas.value.height),
+    );
     const nextState = redoStack.value.pop();
     if (nextState) {
       ctx.value.putImageData(nextState, 0, 0);
@@ -161,7 +188,7 @@ const stopErasing = (): void => {
         @click="changeColor(color)"
       ></div>
     </div>
-    <div class="canvas-container" ref="container">
+    <div ref="container" class="canvas-container">
       <div class="drawing-board-title">
         <span>D</span>
         <span>r</span>
@@ -236,13 +263,13 @@ canvas {
 
   &.is-drawing {
     cursor:
-      url('assets/pencil.svg') 0 18,
+      url('assets/tools/pencil.svg') 0 18,
       auto;
   }
 
   &.is-erasing {
     cursor:
-      url('assets/eraser.svg') 0 18,
+      url('assets/tools/eraser.svg') 0 18,
       auto;
   }
 }

@@ -1,17 +1,16 @@
 <script lang="ts" setup>
-import { ref, onMounted, defineAsyncComponent } from 'vue';
-import { useI18n } from 'vue-i18n';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 import { AuthStepLayout } from 'components/AuthStep';
-import { computed } from 'vue';
 
-const SkipAdditionalModal = defineAsyncComponent(() => import('modals/SkipAdditionalModal'));
+const SkipAdditionalModal = defineAsyncComponent(
+  () => import('modals/SkipAdditionalModal'),
+);
 
 type Props = {
   formRef: App.Any;
   isLoading: boolean;
-  onSignUp: () => Promise<void>;
+  onSignUp: () => void;
   onBackStep: () => void;
 };
 
@@ -24,9 +23,13 @@ const isValidPhoneNumber = ref<boolean>(true);
 const isValidAddress = ref<boolean>(true);
 const isShowSkipAdditionalModal = ref<boolean>(false);
 
-const isEmptyValue = computed<boolean>(() => !address.value || !phoneNumber.value);
+const isEmptyValue = computed<boolean>(
+  () => !address.value || !phoneNumber.value,
+);
 
-const buttonLabel = computed<string>(() => (isEmptyValue.value ? t('skip') : t('get_started')));
+const buttonLabel = computed<string>(() =>
+  isEmptyValue.value ? t('skip') : t('get_started'),
+);
 
 onMounted(() => {
   if (phoneNumber.value) {
@@ -74,8 +77,11 @@ const onContinue = (): void => {
           v-model="phoneNumber"
           name="phoneNumber"
           :label="t('phone_number')"
-          :placeholder="t('enter_your_field', { field: t('phone_number').toLowerCase() })"
-          isOptional
+          :placeholder="
+            t('enter_your_field', { field: t('phone_number').toLowerCase() })
+          "
+          :disabled="isLoading"
+          is-optional
           in-form
           @input="onValidatePhoneNumber"
         />
@@ -83,21 +89,29 @@ const onContinue = (): void => {
           v-model="address"
           name="address"
           :label="t('address')"
-          :placeholder="t('enter_your_field', { field: t('address').toLowerCase() })"
+          :placeholder="
+            t('enter_your_field', { field: t('address').toLowerCase() })
+          "
           is-optional
           in-form
           @input="onValidateAddress"
         />
       </template>
       <template #action>
-        <button-component type="default" size="default" isFullWidth :onClick="onBackStep">
+        <button-component
+          type="default"
+          size="default"
+          is-full-width
+          :disabled="isLoading"
+          :on-click="onBackStep"
+        >
           {{ t('back') }}
         </button-component>
         <button-component
           size="default"
-          :disabled="!isValidPhoneNumber || !isValidAddress"
+          :disabled="!isValidPhoneNumber || !isValidAddress || isLoading"
           is-full-width
-          :onClick="onContinue"
+          :on-click="onContinue"
         >
           {{ buttonLabel }}
         </button-component>
@@ -111,3 +125,4 @@ const onContinue = (): void => {
     />
   </div>
 </template>
+src/components/Form/Button

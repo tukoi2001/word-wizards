@@ -1,13 +1,16 @@
 <script lang="ts" setup>
-import { inject } from 'vue';
 import { APP_PROVIDER } from 'config/constants';
-import SwitchComponent from 'components/Switch';
+import SwitchComponent from 'components/Form/Switch';
 
 const { isDarkMode, toggleTheme } = inject(APP_PROVIDER.darkMode)!;
 </script>
 
 <template>
-  <switch-component v-model="isDarkMode" size="default" :onChange="toggleTheme">
+  <switch-component
+    v-model="isDarkMode"
+    size="default"
+    :on-change="toggleTheme"
+  >
     <template #activeAction>
       <font-icon name="dark-mode" />
     </template>

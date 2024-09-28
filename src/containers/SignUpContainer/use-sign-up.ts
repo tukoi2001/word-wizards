@@ -1,11 +1,14 @@
-import { computed, ref, reactive } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useAuthStore } from 'stores/auth';
+import { showErrorMessage, showSuccessMessage } from 'utils/message-error';
+import { RootRouter } from 'enums/app';
 import { SignUpStep } from 'enums/auth';
 import { REGEX } from 'config/constants';
-import type { FormRules } from 'element-plus';
 
 export default function useSignUp() {
   const { t } = useI18n();
+  const router = useRouter();
+  const authStore = useAuthStore();
+
   const isLoading = ref<boolean>(false);
   const currentStep = ref<SignUpStep>(SignUpStep.EMAIL);
 
@@ -24,7 +27,9 @@ export default function useSignUp() {
       {
         required: true,
         whitespace: true,
-        message: t('required_field', { field: t('email_address').toLowerCase() }),
+        message: t('required_field', {
+          field: t('email_address').toLowerCase(),
+        }),
         trigger: ['blur', 'change'],
       },
       {
@@ -43,7 +48,11 @@ export default function useSignUp() {
       {
         min: 2,
         max: 50,
-        message: t('between_error', { field: t('first_name').toLowerCase(), min: 2, max: 50 }),
+        message: t('between_error', {
+          field: t('first_name').toLowerCase(),
+          min: 2,
+          max: 50,
+        }),
         trigger: ['blur', 'change'],
       },
     ],
@@ -57,7 +66,11 @@ export default function useSignUp() {
       {
         min: 2,
         max: 50,
-        message: t('between_error', { field: t('last_name').toLowerCase(), min: 2, max: 50 }),
+        message: t('between_error', {
+          field: t('last_name').toLowerCase(),
+          min: 2,
+          max: 50,
+        }),
         trigger: ['blur', 'change'],
       },
     ],
@@ -78,7 +91,9 @@ export default function useSignUp() {
       {
         required: true,
         whitespace: true,
-        message: t('required_field', { field: t('password_confirm').toLowerCase() }),
+        message: t('required_field', {
+          field: t('password_confirm').toLowerCase(),
+        }),
         trigger: ['blur', 'change'],
       },
       {
@@ -100,7 +115,11 @@ export default function useSignUp() {
         whitespace: true,
         min: 2,
         max: 50,
-        message: t('between_error', { field: t('address').toLowerCase(), min: 2, max: 50 }),
+        message: t('between_error', {
+          field: t('address').toLowerCase(),
+          min: 2,
+          max: 50,
+        }),
         trigger: ['blur', 'change'],
       },
     ],
@@ -169,9 +188,26 @@ export default function useSignUp() {
     }
   };
 
-  const onSignUp = async (): Promise<void> => {
-    //TODO: Handle sign up
+  const onSignUp = (): void => {
+    isLoading.value = true;
+    authStore.signUp(formFields, {
+      onSuccess: (response: Auth.SignUpResponse) => {
+        showSuccessMessage(response);
+        router.replace({ name: RootRouter.VERIFY_OTP });
+      },
+      onError: (error: App.ErrorResponse) => showErrorMessage(error),
+      onFinally: () => (isLoading.value = false),
+    });
   };
 
-  return { currentStep, isLoading, rules, formFields, steps, onChangeStep, onBackStep, onSignUp };
+  return {
+    currentStep,
+    isLoading,
+    rules,
+    formFields,
+    steps,
+    onChangeStep,
+    onBackStep,
+    onSignUp,
+  };
 }

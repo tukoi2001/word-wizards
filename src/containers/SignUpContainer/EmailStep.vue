@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import InputComponent from 'components/Input';
-import ButtonComponent from 'components/Button';
+import InputComponent from 'components/Form/Input';
+import ButtonComponent from 'components/Form/Button';
 import { AuthStepLayout } from 'components/AuthStep';
 
 type Props = {
@@ -43,7 +41,9 @@ const onValidateEmail = (): void => {
         v-model="email"
         name="email"
         :label="t('email_address')"
-        :placeholder="t('enter_your_field', { field: t('email_address').toLowerCase() })"
+        :placeholder="
+          t('enter_your_field', { field: t('email_address').toLowerCase() })
+        "
         in-form
         @input="onValidateEmail"
       />
@@ -53,10 +53,11 @@ const onValidateEmail = (): void => {
         size="default"
         is-full-width
         :disabled="!isValidEmail"
-        :onClick="onChangeStep"
+        :on-click="onChangeStep"
       >
         {{ t('continue') }}
       </button-component>
     </template>
   </auth-step-layout>
 </template>
+src/components/Form/Button
